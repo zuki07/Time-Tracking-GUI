@@ -108,6 +108,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.project_input.setText("");
                 break;
             case "create_table":
+                log_frame.dml.types_str=log_frame.menu_box.getSelectedItem().toString();
                 log_frame.dml.createNameTable(project_input_lowercase);
                 log_frame.list.add(project_input_lowercase);
                 log_frame.table_model.addRow(new Object[]{toCapitalize(project_input_lowercase), "OPEN"});
@@ -116,39 +117,21 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 break;
             case "create_type":
                 log_frame.dml.insertType(type_input_lowercase);
-                if(log_frame.types_list.indexOf("EMPTY")>-1){
-                    for(int i=0;i<log_frame.types_list.size();i++){
-                        String row_value=log_frame.types_table.getValueAt(i, 0).toString();
-                        if(row_value.compareTo("EMPTY")==0){
-                            log_frame.types_list.remove(row_value);
-                            log_frame.type_table_model.removeRow(i);
-                            break;
-                        }
-                    }
-                }
                 log_frame.types_list.add(type_input_lowercase);
-                log_frame.type_table_model.addRow(new Object[]{toCapitalize(type_input_lowercase)});
-                log_frame.types_table.setForeground(new Color(0, 153, 255));
+                log_frame.menu_box.addItem(toCapitalize(type_input_lowercase));
                 setDatabaseSize();
                 log_frame.table_model.setNumRows(0);
                 log_frame.type_input.setText("TYPE OF PROJECT");
                 log_frame.type_label.setText("");
                 log_frame.hideTypeTools();
-                log_frame.jScrollPane2.setVisible(true);
                 break;
             case "delete_type":
                 log_frame.dml.deleteType(type_input_lowercase);
-                log_frame.type_table_model.removeRow(log_frame.types_list.indexOf(type_input_lowercase));
+                log_frame.menu_box.removeItem(toCapitalize(type_input_lowercase));
                 log_frame.types_list.remove(type_input_lowercase);
-                if(log_frame.types_list.isEmpty()){
-                    log_frame.types_table.setForeground(new Color(242,5,48));
-                    log_frame.type_table_model.addRow(new Object[]{"EMPTY"});
-                    log_frame.types_list.add("EMPTY");
-                }
                 setDatabaseSize();
                 log_frame.type_input.setText("TYPE OF PROJECT");
                 log_frame.type_label.setText("");
-                log_frame.table_model.setNumRows(0);
                 log_frame.hideTypeTools();
                 break;
             case "clear":

@@ -407,7 +407,6 @@ public class ConfigureFrame extends javax.swing.JFrame {
     }
     
     private void clearLogFrame(){
-        log_frame.type_table_model.setNumRows(0);
         log_frame.table_model.setNumRows(0);
         log_frame.type_label.setText("");
     }

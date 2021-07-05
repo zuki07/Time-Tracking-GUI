@@ -5,9 +5,11 @@ package time_log;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -23,7 +25,7 @@ public class Time_log extends javax.swing.JFrame {
     List list, types_list;
     TableMouseListener table_mouse_listener; 
     boolean value_match=false, drop_btn_selected=false, display_type_changes=true;
-    DefaultTableModel table_model, type_table_model;
+    DefaultTableModel table_model;
     ConfirmFrame drop_project;
     String header_str, to_do_str, input_str, database_value, database_size;
     
@@ -35,8 +37,8 @@ public class Time_log extends javax.swing.JFrame {
         table_model=(DefaultTableModel) jTable1.getModel();
         table_mouse_listener=new TableMouseListener(jTable1, this); 
         jTable1.addMouseListener(table_mouse_listener);
-        type_table_model=(DefaultTableModel) types_table.getModel();
-        types_table.addMouseListener(table_mouse_listener);
+//        type_table_model=(DefaultTableModel) types_table.getModel();
+//        types_table.addMouseListener(table_mouse_listener);
         try {
             dml.startConnection(true);
             dml.closeConnection();
@@ -58,9 +60,7 @@ public class Time_log extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        types_table = new javax.swing.JTable();
-        types_label = new javax.swing.JLabel();
+        menu_box = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         type_label = new javax.swing.JLabel();
@@ -82,81 +82,25 @@ public class Time_log extends javax.swing.JFrame {
         setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane2.setBorder(null);
-        jScrollPane2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jScrollPane2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jScrollPane2MouseExited(evt);
-            }
-        });
-
-        types_table.setAutoCreateRowSorter(true);
-        types_table.setBackground(new java.awt.Color(0, 0, 0));
-        types_table.setFont(new java.awt.Font("Elephant", 0, 16)); // NOI18N
-        types_table.setForeground(new java.awt.Color(0, 153, 255));
-        types_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "TYPES"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        menu_box.setBackground(new java.awt.Color(0, 0, 0));
+        menu_box.setFont(new java.awt.Font("Elephant", 0, 15)); // NOI18N
+        menu_box.setForeground(new java.awt.Color(0, 153, 255));
+        menu_box.setMaximumRowCount(4);
+        menu_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TYPES" }));
+        menu_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_boxActionPerformed(evt);
             }
         });
-        types_table.setFocusable(false);
-        types_table.setOpaque(false);
-        types_table.setRequestFocusEnabled(false);
-        types_table.setRowHeight(28);
-        types_table.setSelectionBackground(new java.awt.Color(247, 0, 38));
-        types_table.setSelectionForeground(new java.awt.Color(51, 51, 51));
-        types_table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        types_table.setShowHorizontalLines(false);
-        types_table.setShowVerticalLines(false);
-        types_table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                types_tableMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                types_tableMouseExited(evt);
+        getContentPane().add(menu_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 40));
+        menu_box.setRenderer(new DefaultListCellRenderer() {
+            public void paint(Graphics g){
+                setBackground(new Color(0,0,0));
+                setForeground(new Color(0,153,255));
+                setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+                super.paint(g);
             }
         });
-        jScrollPane2.setViewportView(types_table);
-        ((DefaultTableCellRenderer) types_table.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-        DefaultTableCellRenderer rendar = new DefaultTableCellRenderer();
-        rendar.setHorizontalAlignment(SwingConstants.CENTER);
-        types_table.getColumnModel().getColumn(0).setCellRenderer(rendar);
-        rendar.setBackground(new Color(0,0,0,175));
-        //rendar.setForeground(new Color(0,153,255));
-        types_table.getTableHeader().getColumnModel().getColumn(0).setHeaderRenderer(rendar);
-        types_table.getTableHeader().setPreferredSize(new Dimension(jScrollPane2.getWidth(), 0));
-        types_table.getAccessibleContext().setAccessibleName("");
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 130, 100));
-        jScrollPane2.setVisible(false);
-        jScrollPane2.setOpaque(false);
-        jScrollPane2.getViewport().setOpaque(false);
-        ((DefaultTableCellRenderer)types_table.getDefaultRenderer(Object.class)).setOpaque(false);
-        jScrollPane2.getAccessibleContext().setAccessibleName("");
-
-        types_label.setFont(new java.awt.Font("Elephant", 1, 16)); // NOI18N
-        types_label.setForeground(new java.awt.Color(0, 153, 255));
-        types_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        types_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/time_log/folder_icon.jpg"))); // NOI18N
-        types_label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                types_labelMouseEntered(evt);
-            }
-        });
-        getContentPane().add(types_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 60));
 
         jScrollPane1.setBorder(null);
 
@@ -258,7 +202,7 @@ public class Time_log extends javax.swing.JFrame {
                 plus_minus_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(plus_minus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 60, 40));
+        getContentPane().add(plus_minus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 60, 40));
         plus_minus_btn.getAccessibleContext().setAccessibleName("plus_minus_btn");
 
         type_add.setBackground(new java.awt.Color(0, 0, 0));
@@ -309,7 +253,7 @@ public class Time_log extends javax.swing.JFrame {
                 config_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(config_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 140, 40));
+        getContentPane().add(config_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 140, 40));
         config_btn.getAccessibleContext().setAccessibleName("config_btn");
 
         menu_background.setBackground(new Color(242,5,48,90));
@@ -332,11 +276,15 @@ public class Time_log extends javax.swing.JFrame {
         if(!is_empty){
             is_valid=isValidSql(project_input);
         }
-        if(list!=null && !is_empty){
+        else{
+            showErrorStage("Enter something!");
+            return;
+        }
+        if(list!=null && !is_empty && menu_box.getSelectedItem().toString().compareTo("TYPES")!=0){
             is_all_match=isAllMatch(project_input);
         }
         else{
-            showErrorStage("Enter something!");
+            showErrorStage("Select a type");
             return;
         }
         
@@ -381,32 +329,6 @@ public class Time_log extends javax.swing.JFrame {
         }
         drop_btn_selected=false;
     }//GEN-LAST:event_drop_btnActionPerformed
-
-    private void jScrollPane2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseEntered
-        jScrollPane2.setVisible(true);
-    }//GEN-LAST:event_jScrollPane2MouseEntered
-
-    private void types_labelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_types_labelMouseEntered
-        jScrollPane2.setVisible(true);
-    }//GEN-LAST:event_types_labelMouseEntered
-
-    private void jScrollPane2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseExited
-        jScrollPane2.setVisible(false);
-    }//GEN-LAST:event_jScrollPane2MouseExited
-
-    private void types_tableMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_types_tableMouseExited
-        jScrollPane2.setVisible(false);
-    }//GEN-LAST:event_types_tableMouseExited
-
-    private void types_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_types_tableMouseClicked
-        Point point1=evt.getPoint();
-        int row=types_table.rowAtPoint(point1);
-        String row_value=types_table.getValueAt(row, 0).toString().toLowerCase();
-        type_label.setText(row_value.toUpperCase());
-        dml.types_str=row_value;
-        pushProjectNames(row_value);
-        jScrollPane2.setVisible(false);
-    }//GEN-LAST:event_types_tableMouseClicked
 
     private void plus_minus_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plus_minus_btnActionPerformed
         if(display_type_changes){
@@ -492,6 +414,15 @@ public class Time_log extends javax.swing.JFrame {
         this.setVisible(false);
         configure.setVisible(true);
     }//GEN-LAST:event_config_btnActionPerformed
+
+    private void menu_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_boxActionPerformed
+        if(menu_box.getSelectedItem().toString().compareTo("TYPES")!=0){
+            pushProjectNames(menu_box.getSelectedItem().toString());
+        }
+        else{
+            table_model.setNumRows(0);
+        }
+    }//GEN-LAST:event_menu_boxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -590,17 +521,10 @@ public class Time_log extends javax.swing.JFrame {
     
     public void pushTypes(boolean first_connection){
         types_list=dml.getProjectTypes(first_connection);
-        type_table_model.setNumRows(0);
         if(!types_list.isEmpty()){
-            types_table.setForeground(new Color(0, 153, 255));
             for(int i=0; i<types_list.size(); i++){
-                type_table_model.addRow(new Object[]{toCapitalize(types_list.get(i))});
+                menu_box.addItem(toCapitalize(types_list.get(i)));
             }
-        }
-        else{
-            types_table.setForeground(new Color(242,5,48));
-            type_table_model.addRow(new Object[]{"EMPTY"});
-            types_list.add("EMPTY");
         }
     }
     
@@ -618,10 +542,10 @@ public class Time_log extends javax.swing.JFrame {
     }
     
     public void hideTypeTools(){
+        menu_box.setPopupVisible(false);
         type_input.setVisible(false);
         type_add.setVisible(false);
         type_drop.setVisible(false);
-        jScrollPane2.setVisible(false);
         display_type_changes=true;
     }
     
@@ -629,7 +553,7 @@ public class Time_log extends javax.swing.JFrame {
         type_input.setVisible(true);
         type_add.setVisible(true);
         type_drop.setVisible(true);
-        jScrollPane2.setVisible(true);
+        menu_box.setPopupVisible(true);
         display_type_changes=false;
     }
     
@@ -647,17 +571,15 @@ public class Time_log extends javax.swing.JFrame {
     private javax.swing.JButton config_btn;
     private javax.swing.JButton drop_btn;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JTable jTable1;
     public javax.swing.JLabel mb_label;
     private javax.swing.JLabel menu_background;
+    public javax.swing.JComboBox<String> menu_box;
     private javax.swing.JButton plus_minus_btn;
     public javax.swing.JTextField project_input;
     private javax.swing.JButton type_add;
     private javax.swing.JButton type_drop;
     public javax.swing.JTextField type_input;
     public javax.swing.JLabel type_label;
-    public javax.swing.JLabel types_label;
-    public javax.swing.JTable types_table;
     // End of variables declaration//GEN-END:variables
 }
