@@ -6,6 +6,7 @@ package time_log;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.DefaultListCellRenderer;
@@ -22,11 +23,12 @@ public class Time_log extends javax.swing.JFrame {
 
     DML dml=new DML();
     List list, types_list;
-    TableMouseListener table_mouse_listener; 
+//    TableMouseListener table_mouse_listener; 
     boolean value_match=false, drop_btn_selected=false, display_type_changes=true;
     DefaultTableModel table_model;
     ConfirmFrame drop_project;
     String header_str, to_do_str, input_str, database_value, database_size;
+    ViewProjectFrame project_frame;
     
     /**
      * Creates new form Time_log
@@ -34,13 +36,13 @@ public class Time_log extends javax.swing.JFrame {
     public Time_log(){
         initComponents();
         table_model=(DefaultTableModel) jTable1.getModel();
-        table_mouse_listener=new TableMouseListener(jTable1, this); 
-        jTable1.addMouseListener(table_mouse_listener);
+        project_frame=new ViewProjectFrame(this, dml);
         try {
             dml.startConnection(true);
             dml.closeConnection();
             pushTypes(false);
             setDatabaseSize();
+            project_frame=new ViewProjectFrame(this, dml);
             this.setTitle("Time log -- "+dml.getDatabase());
         } catch (SQLException ex) {
             showErrorStage(ex.toString());
@@ -127,6 +129,11 @@ public class Time_log extends javax.swing.JFrame {
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setShowHorizontalLines(false);
         jTable1.setShowVerticalLines(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         ((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         for(int i=0; i<jTable1.getColumnCount(); i++){
@@ -420,6 +427,18 @@ public class Time_log extends javax.swing.JFrame {
             project_input.setText("");
         }
     }//GEN-LAST:event_project_inputFocusGained
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        Point point=evt.getPoint();
+        int row=jTable1.rowAtPoint(point);
+        int column=jTable1.columnAtPoint(point);
+        if(column==1){
+            String project_name=jTable1.getValueAt(row, 0).toString().toLowerCase();
+            project_frame.setProjectName(project_name);
+            this.setVisible(false);
+            project_frame.setVisible(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

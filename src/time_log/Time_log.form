@@ -119,6 +119,9 @@
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;for(int i=0; i&lt;jTable1.getColumnCount(); i++){&#xa;    DefaultTableCellRenderer render = new DefaultTableCellRenderer();&#xa;    render.setHorizontalAlignment(SwingConstants.CENTER);&#xa;    jTable1.getColumnModel().getColumn(i).setCellRenderer(render); &#xa;    render.setBackground(new Color(0,0,0,175));&#xa;    render.setForeground(new Color(0,153,255));&#xa;    jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);&#xa;    jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

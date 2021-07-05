@@ -311,7 +311,6 @@ public class ConfigureFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_port_btnActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-//        changesMade();
         if(is_tested && !error_with_connection){
             dml.replaceValuesMap(test_map);
             clearLogFrame();
@@ -416,17 +415,27 @@ public class ConfigureFrame extends javax.swing.JFrame {
     }
     
     private void changesMade(){
-        test_map.replace("database", database_input.getText());
-        test_map.replace("username", username_input.getText());
-        test_map.replace("password", password_input.getText());
-        test_map.replace("host", host_input.getText());
-        test_map.replace("port", port_input.getText());
         changes_made=false;
-        data_map.forEach((key, value)->{
-            if(value.compareTo(test_map.get(key))!=0){
-                changes_made=true;
-            }
-        });
+        if(database_input.getText().compareTo(test_map.get("database"))!=0){
+            test_map.replace("database", database_input.getText());
+            changes_made=true;
+        }
+        if(username_input.getText().compareTo(test_map.get("username"))!=0){
+            test_map.replace("username", username_input.getText());
+            changes_made=true;
+        }
+        if(password_input.getText().compareTo(test_map.get("password"))!=0){
+            test_map.replace("password", password_input.getText());
+            changes_made=true;
+        }
+        if(host_input.getText().compareTo(test_map.get("host"))!=0){
+            test_map.replace("host", host_input.getText());
+            changes_made=true;
+        }
+        if(port_input.getText().compareTo(test_map.get("port"))!=0){
+            test_map.replace("port", port_input.getText());
+            changes_made=true;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
