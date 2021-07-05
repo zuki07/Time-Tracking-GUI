@@ -254,8 +254,8 @@ public class ConfigureFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_close_btnActionPerformed
 
     private void test_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_test_btnActionPerformed
-//        changesMade();
-//        if(changes_made){
+        changesMade();
+        if(changes_made){
             try {
                 dml.testConnection(test_map);
                 test_btn.setBackground(new Color(51, 255, 51));
@@ -270,7 +270,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
                 DisplayErrorFrame error_stage=new DisplayErrorFrame(ex.toString());
                 error_stage.setVisible(true);
             }
-//        }
+        }
         is_tested=true;
         is_saved=false;
     }//GEN-LAST:event_test_btnActionPerformed
@@ -408,7 +408,6 @@ public class ConfigureFrame extends javax.swing.JFrame {
     
     private void clearLogFrame(){
         log_frame.table_model.setNumRows(0);
-        log_frame.type_label.setText("");
     }
     
     private void showErrorStage(String error_str){
@@ -416,19 +415,19 @@ public class ConfigureFrame extends javax.swing.JFrame {
         error_stage.setVisible(true);
     }
     
-//    private void changesMade(){
-//        test_map.replace("database", database_input.getText());
-//        test_map.replace("username", username_input.getText());
-//        test_map.replace("password", password_input.getText());
-//        test_map.replace("host", host_input.getText());
-//        test_map.replace("port", port_input.getText());
-//        changes_made=false;
-//        data_map.forEach((key, value)->{
-//            if(value.compareTo(test_map.get(key))!=0){
-//                changes_made=true;
-//            }
-//        });
-//    }
+    private void changesMade(){
+        test_map.replace("database", database_input.getText());
+        test_map.replace("username", username_input.getText());
+        test_map.replace("password", password_input.getText());
+        test_map.replace("host", host_input.getText());
+        test_map.replace("port", port_input.getText());
+        changes_made=false;
+        data_map.forEach((key, value)->{
+            if(value.compareTo(test_map.get(key))!=0){
+                changes_made=true;
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;

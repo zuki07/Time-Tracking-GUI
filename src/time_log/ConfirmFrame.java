@@ -98,14 +98,14 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.table_model.removeRow(log_frame.jTable1.getSelectedRow());
                 log_frame.jTable1.clearSelection();
                 setDatabaseSize();
-                log_frame.project_input.setText("");
+                log_frame.project_input.setText("PROJECT NAME");
                 break;
             case "drop_input":
                 log_frame.dml.dropNamesTable(project_input_lowercase);
                 log_frame.table_model.removeRow(log_frame.list.indexOf(project_input_lowercase));
                 log_frame.list.remove(project_input_lowercase);
                 setDatabaseSize();
-                log_frame.project_input.setText("");
+                log_frame.project_input.setText("PROJECT NAME");
                 break;
             case "create_table":
                 log_frame.dml.types_str=log_frame.menu_box.getSelectedItem().toString();
@@ -113,7 +113,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.list.add(project_input_lowercase);
                 log_frame.table_model.addRow(new Object[]{toCapitalize(project_input_lowercase), "OPEN"});
                 setDatabaseSize();
-                log_frame.project_input.setText("");
+                log_frame.project_input.setText("PROJECT NAME");
                 break;
             case "create_type":
                 log_frame.dml.insertType(type_input_lowercase);
@@ -122,7 +122,6 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 setDatabaseSize();
                 log_frame.table_model.setNumRows(0);
                 log_frame.type_input.setText("TYPE OF PROJECT");
-                log_frame.type_label.setText("");
                 log_frame.hideTypeTools();
                 break;
             case "delete_type":
@@ -131,7 +130,6 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.types_list.remove(type_input_lowercase);
                 setDatabaseSize();
                 log_frame.type_input.setText("TYPE OF PROJECT");
-                log_frame.type_label.setText("");
                 log_frame.hideTypeTools();
                 break;
             case "clear":

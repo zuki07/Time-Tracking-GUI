@@ -6,7 +6,6 @@ package time_log;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.DefaultListCellRenderer;
@@ -37,8 +36,6 @@ public class Time_log extends javax.swing.JFrame {
         table_model=(DefaultTableModel) jTable1.getModel();
         table_mouse_listener=new TableMouseListener(jTable1, this); 
         jTable1.addMouseListener(table_mouse_listener);
-//        type_table_model=(DefaultTableModel) types_table.getModel();
-//        types_table.addMouseListener(table_mouse_listener);
         try {
             dml.startConnection(true);
             dml.closeConnection();
@@ -46,7 +43,6 @@ public class Time_log extends javax.swing.JFrame {
             setDatabaseSize();
             this.setTitle("Time log -- "+dml.getDatabase());
         } catch (SQLException ex) {
-//            dml.closeConnection();
             showErrorStage(ex.toString());
         }
     }
@@ -63,7 +59,6 @@ public class Time_log extends javax.swing.JFrame {
         menu_box = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        type_label = new javax.swing.JLabel();
         add_btn = new javax.swing.JButton();
         drop_btn = new javax.swing.JButton();
         project_input = new javax.swing.JTextField();
@@ -151,11 +146,6 @@ public class Time_log extends javax.swing.JFrame {
         ((DefaultTableCellRenderer)jTable1.getDefaultRenderer(Object.class)).setOpaque(false);
         jScrollPane1.getAccessibleContext().setAccessibleName("jScrollPane1");
 
-        type_label.setFont(new java.awt.Font("Elephant", 1, 20)); // NOI18N
-        type_label.setForeground(new java.awt.Color(0, 153, 255));
-        type_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(type_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 114, 150, 30));
-
         add_btn.setBackground(new java.awt.Color(0, 0, 0));
         add_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
         add_btn.setForeground(new java.awt.Color(242, 5, 48));
@@ -183,6 +173,12 @@ public class Time_log extends javax.swing.JFrame {
         project_input.setBackground(new java.awt.Color(0, 153, 255));
         project_input.setFont(new java.awt.Font("Elephant", 0, 14)); // NOI18N
         project_input.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        project_input.setText("PROJECT NAME");
+        project_input.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                project_inputFocusGained(evt);
+            }
+        });
         getContentPane().add(project_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 465, 200, 30));
         project_input.getAccessibleContext().setAccessibleName("");
 
@@ -284,7 +280,8 @@ public class Time_log extends javax.swing.JFrame {
             is_all_match=isAllMatch(project_input);
         }
         else{
-            showErrorStage("Select a type");
+            showErrorStage("Please select a project type from the drop down menu");
+            project_input.setText("PROJECT NAME");
             return;
         }
         
@@ -300,10 +297,6 @@ public class Time_log extends javax.swing.JFrame {
         else if(!is_valid){
             showErrorStage(project_input.getText()+" is not a valid table name <no spaces>");
         }
-        else{
-            showErrorStage("Please select a type");
-        }
-        project_input.setText("");
     }//GEN-LAST:event_add_btnActionPerformed
 
     private void drop_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drop_btnActionPerformed
@@ -322,7 +315,7 @@ public class Time_log extends javax.swing.JFrame {
             drop_project.setVisible(true);
         }
         else if(list==null && !is_empty){
-            showErrorStage("Please select a type");
+            showErrorStage("Please select a project type from the drop down menu");
         }
         else if(list!=null && is_empty){
             showErrorStage("Enter Something!");
@@ -372,7 +365,6 @@ public class Time_log extends javax.swing.JFrame {
         else if(types_list==null){
             showErrorStage("Please configure a server");
         }
-        project_input.setText("");
     }//GEN-LAST:event_type_addActionPerformed
 
     private void type_dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type_dropActionPerformed
@@ -405,7 +397,6 @@ public class Time_log extends javax.swing.JFrame {
         else if(types_list==null){
             showErrorStage("Please configure a server");
         }
-        project_input.setText("");
         drop_btn_selected=false;
     }//GEN-LAST:event_type_dropActionPerformed
 
@@ -423,6 +414,12 @@ public class Time_log extends javax.swing.JFrame {
             table_model.setNumRows(0);
         }
     }//GEN-LAST:event_menu_boxActionPerformed
+
+    private void project_inputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_project_inputFocusGained
+        if(project_input.getText().compareTo("PROJECT NAME")==0){
+            project_input.setText("");
+        }
+    }//GEN-LAST:event_project_inputFocusGained
 
     /**
      * @param args the command line arguments
@@ -462,7 +459,7 @@ public class Time_log extends javax.swing.JFrame {
     
     private boolean isEmpty(JTextField input){
         boolean empty=false;
-        if(input.getText().compareTo("")==0 || input.getText().compareTo("TYPE OF PROJECT")==0){
+        if(input.getText().compareTo("PROJECT NAME")==0 || input.getText().compareTo("TYPE OF PROJECT")==0){
             empty=true;
         }
         return empty;
@@ -521,6 +518,12 @@ public class Time_log extends javax.swing.JFrame {
     
     public void pushTypes(boolean first_connection){
         types_list=dml.getProjectTypes(first_connection);
+        int itmes_num=menu_box.getItemCount();
+        for(int i=0;i<itmes_num;i++){
+            if(i!=0){
+                menu_box.removeItemAt(1);
+            }
+        }
         if(!types_list.isEmpty()){
             for(int i=0; i<types_list.size(); i++){
                 menu_box.addItem(toCapitalize(types_list.get(i)));
@@ -580,6 +583,5 @@ public class Time_log extends javax.swing.JFrame {
     private javax.swing.JButton type_add;
     private javax.swing.JButton type_drop;
     public javax.swing.JTextField type_input;
-    public javax.swing.JLabel type_label;
     // End of variables declaration//GEN-END:variables
 }
