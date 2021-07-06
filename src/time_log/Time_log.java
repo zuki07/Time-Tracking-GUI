@@ -23,7 +23,6 @@ public class Time_log extends javax.swing.JFrame {
 
     DML dml=new DML();
     List list, types_list;
-//    TableMouseListener table_mouse_listener; 
     boolean value_match=false, drop_btn_selected=false, display_type_changes=true;
     DefaultTableModel table_model;
     ConfirmFrame drop_project;
