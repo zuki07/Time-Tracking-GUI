@@ -27,7 +27,7 @@ public class Time_log extends javax.swing.JFrame {
     DefaultTableModel table_model;
     ConfirmFrame drop_project;
     String header_str, to_do_str, input_str, database_value, database_size;
-    ViewProjectFrame project_frame;
+    ViewProjectFrame project_frame, view_frame;
     
     /**
      * Creates new form Time_log
