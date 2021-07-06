@@ -17,7 +17,6 @@ public class ViewProjectFrame extends javax.swing.JFrame {
 
     HandleTime handle_time=new HandleTime();
     String project_name;
-    DML dml;
     Timer timer;
     double timer_counter=1;
     boolean saved=true;
@@ -28,22 +27,20 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      * @param stage
-     * @param dml
      */
-    public ViewProjectFrame(Time_log stage, DML dml) {
+    public ViewProjectFrame(Time_log stage) {
         this.timer=initTimer();
         this.time_log_stage=stage;
-        this.dml=dml;
         initComponents();
         table_model=(DefaultTableModel) jTable1.getModel();
     }
     
     public void setProjectName(String project_name){
         this.project_name=project_name;
-        dml.setTable(this.project_name);
-        total_label.setText(dml.getTotalTime());
+        time_log_stage.dml.setTable(this.project_name);
+        total_label.setText(time_log_stage.dml.getTotalTime());
         records_map=new HashMap();
-        records_map=dml.readAllRecords();
+        records_map=time_log_stage.dml.readAllRecords();
         pushProjectNames();
         String lower_case_project_name=toCapitalize(this.project_name);
         project_label.setText(lower_case_project_name);
@@ -251,7 +248,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         handle_time.timeStart();
         handle_time.startDate();
         start_time_label.setVisible(true);
-        start_time_label.setText(dml.getTimeStart());
+        start_time_label.setText(time_log_stage.dml.getTimeStart());
         end_time_label.setVisible(false);
         buttonClickedColor("start");
         saved=false;
@@ -264,13 +261,13 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             handle_time.timeDuration();
             timer.stop();
             try {
-                handle_time.totalTime(dml);
-                dml.insertRecords();
+                handle_time.totalTime(time_log_stage.dml);
+                time_log_stage.dml.insertRecords();
                 timer_counter=1;
-                total_label.setText(dml.getTotalTime());
+                total_label.setText(time_log_stage.dml.getTotalTime());
                 duration_label.setText("0:0");
                 end_time_label.setVisible(true);
-                end_time_label.setText(dml.getTimeEnd());
+                end_time_label.setText(time_log_stage.dml.getTimeEnd());
                 saved=true;
             } catch (SQLException ex) {
                 showErrorStage(ex.toString());

@@ -36,13 +36,12 @@ public class Time_log extends javax.swing.JFrame {
     public Time_log(){
         initComponents();
         table_model=(DefaultTableModel) jTable1.getModel();
-        project_frame=new ViewProjectFrame(this, dml);
+        project_frame=new ViewProjectFrame(this);
         try {
             dml.startConnection(true);
             dml.closeConnection();
             pushTypes(false);
             setDatabaseSize();
-            project_frame=new ViewProjectFrame(this, dml);
             this.setTitle("Time log -- "+dml.getDatabase());
         } catch (SQLException ex) {
             showErrorStage(ex.toString());
@@ -408,7 +407,7 @@ public class Time_log extends javax.swing.JFrame {
     }//GEN-LAST:event_type_dropActionPerformed
 
     private void config_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_config_btnActionPerformed
-        ConfigureFrame configure=new ConfigureFrame(dml, this);
+        ConfigureFrame configure=new ConfigureFrame(this);
         this.setVisible(false);
         configure.setVisible(true);
     }//GEN-LAST:event_config_btnActionPerformed

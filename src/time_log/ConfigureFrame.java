@@ -23,18 +23,15 @@ public class ConfigureFrame extends javax.swing.JFrame {
     SqlConnection sql_conn;
     Map <String,String> data_map=new HashMap();
     Map <String,String> test_map=new HashMap();
-    DML dml;
     boolean is_saved=true, error_with_connection=false, changes_made=false, is_tested=false;
     Time_log log_frame;
     
     /**
      * Creates new form ConfigureFrame
-     * @param dml
      * @param log_frame
      */
-    public ConfigureFrame(DML dml, Time_log log_frame) {
+    public ConfigureFrame(Time_log log_frame) {
         initComponents();
-        this.dml=dml;
         this.log_frame=log_frame;
         readData();
         test_map.putAll(data_map);
@@ -257,7 +254,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
         changesMade();
         if(changes_made){
             try {
-                dml.testConnection(test_map);
+                log_frame.dml.testConnection(test_map);
                 test_btn.setBackground(new Color(51, 255, 51));
                 database_btn.setBackground(new Color(0, 0, 0));
                 username_btn.setBackground(new Color(0, 0, 0));
@@ -312,12 +309,12 @@ public class ConfigureFrame extends javax.swing.JFrame {
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         if(is_tested && !error_with_connection){
-            dml.replaceValuesMap(test_map);
+            log_frame.dml.replaceValuesMap(test_map);
             clearLogFrame();
             log_frame.pushTypes(false);
             writeData();
             save_btn.setBackground(new Color(51, 255, 51));
-            log_frame.setTitle("Time log -- "+dml.getDatabase());
+            log_frame.setTitle("Time log -- "+log_frame.dml.getDatabase());
             error_with_connection=false;
             error_with_connection=true;
             changes_made=false;
