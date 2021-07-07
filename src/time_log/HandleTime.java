@@ -84,6 +84,10 @@ public class HandleTime extends SqlConnection{
             String [] tokens=total_time.split(":");
             int total_hr=duration_hr+Integer.parseInt(tokens[0]);
             int total_min=duration_min+Integer.parseInt(tokens[1]);
+            if(total_min>=60){
+                total_hr++;
+                total_min=total_min-60;
+            }
             total_str=String.format("%s:%s",total_hr,total_min);
         }
         else{
