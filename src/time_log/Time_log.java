@@ -562,7 +562,6 @@ public class Time_log extends javax.swing.JFrame {
     }
     
     public void hideTypeTools(){
-        menu_box.setPopupVisible(false);
         type_input.setVisible(false);
         type_add.setVisible(false);
         type_drop.setVisible(false);
@@ -573,7 +572,6 @@ public class Time_log extends javax.swing.JFrame {
         type_input.setVisible(true);
         type_add.setVisible(true);
         type_drop.setVisible(true);
-        menu_box.setPopupVisible(true);
         display_type_changes=false;
     }
     
