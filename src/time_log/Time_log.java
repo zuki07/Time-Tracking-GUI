@@ -100,18 +100,18 @@ public class Time_log extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
 
         jTable1.setBackground(new java.awt.Color(0, 0, 0));
-        jTable1.setFont(new java.awt.Font("Elephant", 0, 16)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Elephant", 0, 14)); // NOI18N
         jTable1.setForeground(new java.awt.Color(0, 153, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "PROJECT NAME", ""
+                "PROJECT NAME", "TOTAL TIME", ""
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -145,7 +145,7 @@ public class Time_log extends javax.swing.JFrame {
         }
         jTable1.getAccessibleContext().setAccessibleName("");
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 400, 300));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 450, 300));
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         ((DefaultTableCellRenderer)jTable1.getDefaultRenderer(Object.class)).setOpaque(false);
@@ -430,7 +430,7 @@ public class Time_log extends javax.swing.JFrame {
         Point point=evt.getPoint();
         int row=jTable1.rowAtPoint(point);
         int column=jTable1.columnAtPoint(point);
-        if(column==1){
+        if(column==2){
             String project_name=jTable1.getValueAt(row, 0).toString().toLowerCase();
             project_frame.setProjectName(project_name);
             this.setVisible(false);
@@ -528,7 +528,7 @@ public class Time_log extends javax.swing.JFrame {
         list=dml.getProjectsRecords(project_type);
         if(!list.isEmpty()){
             for(int i=0; i<list.size(); i++){
-                table_model.addRow(new Object[]{toCapitalize(list.get(i)), "OPEN"});
+                table_model.addRow(new Object[]{toCapitalize(list.get(i)), dml.getTotalTime(list.get(i).toString()), "OPEN"});
             }
         }
     }

@@ -154,8 +154,8 @@ public class DML extends HandleTime{
         total_str=total_string;
     }
     
-    @Override
-    public String getTotalTime(){
+//    @Override
+    public String getTotalTime(String table_name){
         try {
             first_connection=false;
             con=startConnection(first_connection);

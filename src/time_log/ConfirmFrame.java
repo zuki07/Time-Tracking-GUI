@@ -107,7 +107,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 setDatabaseSize();
                 log_frame.project_input.setText("PROJECT NAME");
                 break;
-            case "create_table":
+            case "create_project":
                 log_frame.dml.types_str=log_frame.menu_box.getSelectedItem().toString();
                 log_frame.dml.insertProjectNamesValues(project_input_lowercase);
                 log_frame.list.add(project_input_lowercase);

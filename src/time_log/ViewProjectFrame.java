@@ -38,13 +38,12 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     public void setProjectName(String project_name){
         this.project_name=project_name;
         time_log_stage.dml.setTable(this.project_name);
-        total_label.setText(time_log_stage.dml.getTotalTime());
+        total_label.setText(time_log_stage.dml.getTotalTime(project_name));
         records_map=new HashMap();
         records_map=time_log_stage.dml.readProjectRecords();
         pushProjectNames();
         String lower_case_project_name=toCapitalize(this.project_name);
         project_label.setText(lower_case_project_name);
-        this.setTitle(lower_case_project_name);
     }
 
     /**
@@ -72,7 +71,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle(project_name);
+        setTitle("Project Time Keeper");
         setBackground(new java.awt.Color(102, 153, 255));
         setIconImages(null);
         setSize(new java.awt.Dimension(800, 650));
@@ -86,7 +85,6 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         project_label.setFont(new java.awt.Font("Elephant", 1, 24)); // NOI18N
         project_label.setForeground(new java.awt.Color(0, 153, 255));
         project_label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        project_label.setText("");
         project_label.setOpaque(true);
         jPanel1.add(project_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 40));
 
@@ -285,9 +283,16 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         }
         else{
             setToDefault();
+            int row=0;
+            for(int i=0;i<time_log_stage.jTable1.getRowCount();i++){
+                if(time_log_stage.table_model.getValueAt(i, 1).toString().compareTo(project_name)==0){
+                    row=i;
+                    break;
+                }
+            }
+            time_log_stage.table_model.setValueAt(time_log_stage.dml.getTotalTime(project_name), row, 1);
             this.setVisible(false);
             time_log_stage.setVisible(true);
-            buttonClickedColor("close");
         }
     }//GEN-LAST:event_close_btnActionPerformed
     
