@@ -8,16 +8,12 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.Timer;
 
 
 public class HandleTime extends SqlConnection{
     static String start_date, end_date, start_str, end_str, duration_str, total_str;
     private LocalTime time_start, time_end, time_duration;
     private int duration_hr, duration_min; 
-    Timer timer_array[]=new Timer[5];
-    int count=0;
-    boolean timer_running=false;
     
     public void startDate(){
         LocalDate date_now=LocalDate.now();

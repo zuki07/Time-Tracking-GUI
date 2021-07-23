@@ -2,6 +2,8 @@
 package time_log;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
 
 
 public class ConfirmFrame extends javax.swing.JFrame {
@@ -9,6 +11,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
     Time_log log_frame;
     ConfigureFrame config_frame;
     String to_do, header_str, project_input_lowercase, type_input_lowercase;
+    int timer_counter;
     
     /**
      * Creates new form Error_stage
@@ -98,14 +101,14 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.table_model.removeRow(log_frame.jTable1.getSelectedRow());
                 log_frame.jTable1.clearSelection();
                 setDatabaseSize();
-                log_frame.project_input.setText("PROJECT NAME");
+                log_frame.project_input.setText("--PROJECT NAME--");
                 break;
             case "drop_input":
                 log_frame.dml.deleteProjectName(project_input_lowercase);
                 log_frame.table_model.removeRow(log_frame.list.indexOf(project_input_lowercase));
                 log_frame.list.remove(project_input_lowercase);
                 setDatabaseSize();
-                log_frame.project_input.setText("PROJECT NAME");
+                log_frame.project_input.setText("--PROJECT NAME--");
                 break;
             case "create_project":
                 log_frame.dml.types_str=log_frame.menu_box.getSelectedItem().toString();
@@ -113,7 +116,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.list.add(project_input_lowercase);
                 log_frame.table_model.addRow(new Object[]{toCapitalize(project_input_lowercase), "", "OPEN"});
                 setDatabaseSize();
-                log_frame.project_input.setText("PROJECT NAME");
+                log_frame.project_input.setText("--PROJECT NAME--");
                 break;
             case "create_type":
                 log_frame.dml.insertType(type_input_lowercase);
@@ -121,16 +124,19 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.menu_box.addItem(toCapitalize(type_input_lowercase));
                 setDatabaseSize();
                 log_frame.table_model.setNumRows(0);
-                log_frame.type_input.setText("TYPE OF PROJECT");
+                log_frame.type_input.setText("--TYPE OF PROJECT--");
                 log_frame.hideTypeTools();
                 break;
             case "delete_type":
+                RunningFrame run_frame=new RunningFrame();
+                run_frame.setVisible(true);
                 log_frame.dml.deleteType(type_input_lowercase);
                 log_frame.menu_box.removeItem(toCapitalize(type_input_lowercase));
                 log_frame.types_list.remove(type_input_lowercase);
                 setDatabaseSize();
-                log_frame.type_input.setText("TYPE OF PROJECT");
+                log_frame.type_input.setText("--TYPE OF PROJECT--");
                 log_frame.hideTypeTools();
+                run_frame.dispose();
                 break;
             case "clear":
                 config_frame.database_input.setText("");

@@ -180,7 +180,7 @@ public class Time_log extends javax.swing.JFrame {
         project_input.setBackground(new java.awt.Color(0, 153, 255));
         project_input.setFont(new java.awt.Font("Elephant", 0, 14)); // NOI18N
         project_input.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        project_input.setText("PROJECT NAME");
+        project_input.setText("--PROJECT NAME--");
         project_input.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 project_inputFocusGained(evt);
@@ -237,7 +237,7 @@ public class Time_log extends javax.swing.JFrame {
         type_input.setBackground(new java.awt.Color(0, 153, 255));
         type_input.setFont(new java.awt.Font("Elephant", 0, 14)); // NOI18N
         type_input.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        type_input.setText("TYPE OF PROJECT");
+        type_input.setText("--TYPE OF PROJECT--");
         type_input.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 type_inputFocusGained(evt);
@@ -275,18 +275,18 @@ public class Time_log extends javax.swing.JFrame {
     private void add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btnActionPerformed
         boolean is_empty=isEmpty(project_input),
                 is_all_match;
-        if(is_empty){
-            showErrorStage("Enter something!");
-        }
         if(list!=null && !is_empty && menu_box.getSelectedItem().toString().compareTo("TYPES")!=0){
             is_all_match=isAllMatch(project_input);
         }
-        else{
+        else if(list!=null && !is_empty && menu_box.getSelectedItem().toString().compareTo("TYPES")==0){
             showErrorStage("Please select a project type from the drop down menu");
-            project_input.setText("PROJECT NAME");
+            project_input.setText("--PROJECT NAME--");
             return;
         }
-        
+        else{
+            showErrorStage("Enter something!");
+            return;
+        }
         if(list!=null && !is_all_match){
             header_str="Are you sure you want to create: "+project_input.getText();
             to_do_str="create_project";
@@ -332,14 +332,13 @@ public class Time_log extends javax.swing.JFrame {
     }//GEN-LAST:event_plus_minus_btnActionPerformed
 
     private void type_inputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_type_inputFocusGained
-        if(type_input.getText().compareTo("TYPE OF PROJECT")==0){
+        if(type_input.getText().compareTo("--TYPE OF PROJECT--")==0){
             type_input.setText("");
         }
     }//GEN-LAST:event_type_inputFocusGained
 
     private void type_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type_addActionPerformed
-        boolean is_empty=isEmpty(type_input),
-                is_valid=false, is_match=false;
+        boolean is_empty=isEmpty(type_input), is_match=false;
         
         if(is_empty){
             showErrorStage("Enter something!");
@@ -348,7 +347,7 @@ public class Time_log extends javax.swing.JFrame {
             is_match=isMatch(types_list, type_input);
         }
         
-        if(!is_empty && types_list!=null && is_valid && !is_match){
+        if(!is_empty && types_list!=null && !is_match){
             header_str="Are you sure you want to insert: "+type_input.getText();
             to_do_str="create_type";
             drop_project=new ConfirmFrame(this, to_do_str, header_str);
@@ -356,9 +355,6 @@ public class Time_log extends javax.swing.JFrame {
         }
         else if(!is_empty && types_list!=null && is_match){
             showErrorStage(type_input.getText()+" already exsists");
-        }
-        else if(!is_empty && !is_valid && types_list!=null){
-            showErrorStage(type_input.getText()+" is not a valid table name <no spaces>");
         }
         else if(types_list==null){
             showErrorStage("Please configure a server");
@@ -409,7 +405,7 @@ public class Time_log extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_boxActionPerformed
 
     private void project_inputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_project_inputFocusGained
-        if(project_input.getText().compareTo("PROJECT NAME")==0){
+        if(project_input.getText().compareTo("--PROJECT NAME--")==0){
             project_input.setText("");
         }
     }//GEN-LAST:event_project_inputFocusGained
@@ -464,8 +460,13 @@ public class Time_log extends javax.swing.JFrame {
     
     private boolean isEmpty(JTextField input){
         boolean empty=false;
-        if(input.getText().compareTo("PROJECT NAME")==0 || input.getText().compareTo("TYPE OF PROJECT")==0){
+        if(input.getText().compareTo("--PROJECT NAME--")==0){
             empty=true;
+            return empty;
+        }
+        if(input.getText().compareTo("--TYPE OF PROJECT--")==0){
+            empty=true;
+            return empty;
         }
         return empty;
     }

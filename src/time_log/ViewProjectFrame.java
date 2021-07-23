@@ -285,7 +285,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             setToDefault();
             int row=0;
             for(int i=0;i<time_log_stage.jTable1.getRowCount();i++){
-                if(time_log_stage.table_model.getValueAt(i, 1).toString().compareTo(project_name)==0){
+                if(time_log_stage.table_model.getValueAt(i, 0).toString().toLowerCase().compareTo(project_name)==0){
                     row=i;
                     break;
                 }
