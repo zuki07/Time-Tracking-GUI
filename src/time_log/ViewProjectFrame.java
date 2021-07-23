@@ -40,12 +40,11 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         time_log_stage.dml.setTable(this.project_name);
         total_label.setText(time_log_stage.dml.getTotalTime());
         records_map=new HashMap();
-        records_map=time_log_stage.dml.readAllRecords();
+        records_map=time_log_stage.dml.readProjectRecords();
         pushProjectNames();
         String lower_case_project_name=toCapitalize(this.project_name);
         project_label.setText(lower_case_project_name);
         this.setTitle(lower_case_project_name);
-        
     }
 
     /**
@@ -86,7 +85,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         project_label.setBackground(new Color(0,0,0,175));
         project_label.setFont(new java.awt.Font("Elephant", 1, 24)); // NOI18N
         project_label.setForeground(new java.awt.Color(0, 153, 255));
-        project_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        project_label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         project_label.setText("");
         project_label.setOpaque(true);
         jPanel1.add(project_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 40));
@@ -262,7 +261,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             timer.stop();
             try {
                 handle_time.totalTime(time_log_stage.dml);
-                time_log_stage.dml.insertRecords();
+                time_log_stage.dml.insertProjectRecords();
                 timer_counter=1;
                 total_label.setText(time_log_stage.dml.getTotalTime());
                 duration_label.setText("0:0");
@@ -280,7 +279,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
 
     private void close_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_btnActionPerformed
         if(!saved){
-            String error_str="Are you sure you want to close without saving?";
+            String error_str="Are you sure you want to close without stopping?";
             ErrorSaveFrame error_stage=new ErrorSaveFrame(error_str, this, time_log_stage);
             error_stage.setVisible(true);
         }

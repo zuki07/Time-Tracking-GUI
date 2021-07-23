@@ -93,7 +93,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
     private void yes_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yes_btnActionPerformed
         switch (to_do){
             case "drop_click":
-                log_frame.dml.dropNamesTable(log_frame.jTable1.getValueAt(log_frame.jTable1.getSelectedRow(), 0).toString().toLowerCase());
+                log_frame.dml.deleteProjectName(log_frame.jTable1.getValueAt(log_frame.jTable1.getSelectedRow(), 0).toString().toLowerCase());
                 log_frame.list.remove(log_frame.jTable1.getSelectedRow());
                 log_frame.table_model.removeRow(log_frame.jTable1.getSelectedRow());
                 log_frame.jTable1.clearSelection();
@@ -101,7 +101,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.project_input.setText("PROJECT NAME");
                 break;
             case "drop_input":
-                log_frame.dml.dropNamesTable(project_input_lowercase);
+                log_frame.dml.deleteProjectName(project_input_lowercase);
                 log_frame.table_model.removeRow(log_frame.list.indexOf(project_input_lowercase));
                 log_frame.list.remove(project_input_lowercase);
                 setDatabaseSize();
@@ -109,7 +109,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 break;
             case "create_table":
                 log_frame.dml.types_str=log_frame.menu_box.getSelectedItem().toString();
-                log_frame.dml.createNameTable(project_input_lowercase);
+                log_frame.dml.insertProjectNamesValues(project_input_lowercase);
                 log_frame.list.add(project_input_lowercase);
                 log_frame.table_model.addRow(new Object[]{toCapitalize(project_input_lowercase), "OPEN"});
                 setDatabaseSize();

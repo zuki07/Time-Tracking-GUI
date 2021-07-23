@@ -80,7 +80,7 @@ public class HandleTime extends SqlConnection{
     
     public void totalTime(DML dml) throws SQLException{
         String total_time=dml.getTotalTime();
-        if(total_time!=null){
+        if(total_time.compareTo("")!=0){
             String [] tokens=total_time.split(":");
             int total_hr=duration_hr+Integer.parseInt(tokens[0]);
             int total_min=duration_min+Integer.parseInt(tokens[1]);

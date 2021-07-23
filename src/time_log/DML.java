@@ -20,22 +20,13 @@ public class DML extends HandleTime{
     Map<Integer,Map<String,String>> records_row;
     
     
-    public void createNameTable(String table_name){
+    public void insertProjectNamesValues(String table_name){
         try {
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query="CREATE TABLE "+table_name+
-                    " (project_name VARCHAR(40) NULL DEFAULT NULL, date DATE NULL DEFAULT NULL , start_time VARCHAR(10) NULL DEFAULT NULL , "
-                    + "end_time VARCHAR(10) NULL DEFAULT NULL , duration VARCHAR(10) NULL DEFAULT NULL , "
-                    + "total_time VARCHAR(10) NULL DEFAULT NULL) ENGINE = InnoDB";
+            String query=String.format("INSERT INTO project_names VALUES ('%s', '%s')", types_str, table_name);
             stmt.executeUpdate(query);
-            query="INSERT INTO "+table_name+" VALUES ('"+table_name+"',null, null, null, null, null)";
-            stmt.executeUpdate(query);
-            query=String.format("INSERT INTO project_names VALUES ('%s', '%s')", types_str, table_name);
-            stmt.executeUpdate(query);
-            query="ALTER TABLE "+table_name+" ADD CONSTRAINT FOREIGN KEY (project_name) REFERENCES project_names(project_names)";
-            stmt.execute(query);
             stmt.close();
             closeConnection();
         } catch (SQLException ex) {
@@ -62,7 +53,7 @@ public class DML extends HandleTime{
             
             List list=getProjectsRecords(type);
             for(int i=0;i<list.size();i++){
-                dropNamesTable(list.get(i).toString());
+                deleteProjectName(list.get(i).toString());
             }
             first_connection=false;
             con=startConnection(first_connection);
@@ -79,12 +70,12 @@ public class DML extends HandleTime{
         this.table_name=table;
     }
     
-    public void dropNamesTable(String table_name){
+    public void deleteProjectName(String table_name){
         try {
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query="DROP TABLE "+table_name;
+            String query="DELETE FROM projects_data where project_name = '"+table_name+"'";
             stmt.executeUpdate(query);
             query="DELETE FROM project_names where project_names = '"+table_name+"'";
             stmt.executeUpdate(query);
@@ -95,12 +86,12 @@ public class DML extends HandleTime{
         }
     }
     
-    public void insertRecords(){
+    public void insertProjectRecords(){
         try {
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query=String.format("INSERT INTO "+table_name+"(project_name, date, start_time, end_time, duration, total_time) "+
+            String query=String.format("INSERT INTO projects_data (project_name, date, start_time, end_time, duration, total_time) "+
                     "VALUES ('%s','%s', '%s', '%s', '%s', '%s')",table_name,start_date,start_str,end_str,duration_str,total_str);
             stmt.executeUpdate(query);
             stmt.close();
@@ -110,12 +101,10 @@ public class DML extends HandleTime{
         }
     }
     
-    public Map readAllRecords(){
+    public Map readProjectRecords(){
         try {
             String query2="SELECT date, start_time, end_time, duration, total_time " +
-                            "from types " +
-                            "join project_names on types.project_types = project_names.project_types " +
-                            "join "+table_name+" on "+table_name+".project_name=project_names.project_names";
+                            "from projects_data where project_name = '"+table_name+"'";
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.prepareStatement(query2);
@@ -141,31 +130,6 @@ public class DML extends HandleTime{
         return records_row;
     }
     
-    public void setTotalTime(String total_string){
-        total_str=total_string;
-    }
-    
-    @Override
-    public String getTotalTime(){
-        try {
-            first_connection=false;
-            con=startConnection(first_connection);
-            stmt=con.createStatement();
-            ResultSet rs_total=stmt.executeQuery("Select total_time from "+table_name+" order by total_time desc limit 1");
-            total_str="";
-            while(rs_total.next()){
-                total_str=rs_total.getString("total_time");
-            }
-            rs_total.close();
-            stmt.close();
-            closeConnection();
-        } catch (SQLException ex) {
-            showErrorStage(ex.toString());
-        }
-        return total_str;
-    }
-    
-    
     public List getProjectsRecords(String type_table){
         List project_list=new ArrayList();
         try {
@@ -184,6 +148,30 @@ public class DML extends HandleTime{
             showErrorStage(ex.toString());
         }
         return project_list;
+    }
+    
+    public void setTotalTime(String total_string){
+        total_str=total_string;
+    }
+    
+    @Override
+    public String getTotalTime(){
+        try {
+            first_connection=false;
+            con=startConnection(first_connection);
+            stmt=con.createStatement();
+            ResultSet rs_total=stmt.executeQuery("Select total_time from projects_data where project_name = '"+table_name+"' order by total_time desc limit 1");
+            total_str="";
+            while(rs_total.next()){
+                total_str=rs_total.getString("total_time");
+            }
+            rs_total.close();
+            stmt.close();
+            closeConnection();
+        } catch (SQLException ex) {
+            showErrorStage(ex.toString());
+        }
+        return total_str;
     }
     
     public List getAllProjects(){
@@ -224,26 +212,6 @@ public class DML extends HandleTime{
         return type;
     }
     
-    public String getDatabaseSize(){
-        String database_size="";
-        try {
-            first_connection=false;
-            con=startConnection(first_connection);
-            stmt=con.createStatement();
-            ResultSet rs=stmt.executeQuery("SELECT ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS 'Size (MB)' " +
-                                            "FROM information_schema.TABLES WHERE table_schema = '"+this.getDatabase()+"'");
-            while(rs.next()){
-                database_size=rs.getString("Size (MB)");
-            }
-            rs.close();
-            stmt.close();
-            closeConnection();
-        } catch (SQLException ex) {
-            showErrorStage(ex.toString());
-        }
-        return database_size;
-    }
-    
     public List getProjectTypes(boolean first_connection){
         List types_list=new ArrayList();
         try {
@@ -266,6 +234,26 @@ public class DML extends HandleTime{
             showErrorStage(ex.toString());
         }
         return types_list;
+    }
+    
+    public String getDatabaseSize(){
+        String database_size="";
+        try {
+            first_connection=false;
+            con=startConnection(first_connection);
+            stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery("SELECT ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS 'Size (MB)' " +
+                                            "FROM information_schema.TABLES WHERE table_schema = '"+this.getDatabase()+"'");
+            while(rs.next()){
+                database_size=rs.getString("Size (MB)");
+            }
+            rs.close();
+            stmt.close();
+            closeConnection();
+        } catch (SQLException ex) {
+            showErrorStage(ex.toString());
+        }
+        return database_size;
     }
     
     private void showErrorStage(String error_str){
