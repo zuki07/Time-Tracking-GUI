@@ -2,16 +2,15 @@
 package time_log;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import javax.swing.Timer;
 
 
 public class ConfirmFrame extends javax.swing.JFrame {
 
     Time_log log_frame;
+    RunningFrame run_frame;
     ConfigureFrame config_frame;
     String to_do, header_str, project_input_lowercase, type_input_lowercase;
-    int timer_counter;
+    
     
     /**
      * Creates new form Error_stage
@@ -28,6 +27,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
         header_label.setText(this.header_str);
         project_input_lowercase=this.log_frame.project_input.getText().toLowerCase();
         type_input_lowercase=this.log_frame.type_input.getText().toLowerCase();
+        run_frame=new RunningFrame();
     }
     
     public ConfirmFrame(ConfigureFrame config_frame, String to_do, String header_str){
@@ -94,6 +94,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void yes_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yes_btnActionPerformed
+        run_frame.setVisible(true);
         switch (to_do){
             case "drop_click":
                 log_frame.dml.deleteProjectName(log_frame.jTable1.getValueAt(log_frame.jTable1.getSelectedRow(), 0).toString().toLowerCase());
@@ -128,15 +129,17 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.hideTypeTools();
                 break;
             case "delete_type":
-                RunningFrame run_frame=new RunningFrame();
-                run_frame.setVisible(true);
+                if(log_frame.list!=null){
+                    for(int i=0;i<log_frame.list.size();i++){
+                        log_frame.dml.deleteProjectName(log_frame.list.get(i).toString());
+                    }
+                }
                 log_frame.dml.deleteType(type_input_lowercase);
                 log_frame.menu_box.removeItem(toCapitalize(type_input_lowercase));
                 log_frame.types_list.remove(type_input_lowercase);
                 setDatabaseSize();
                 log_frame.type_input.setText("--TYPE OF PROJECT--");
                 log_frame.hideTypeTools();
-                run_frame.dispose();
                 break;
             case "clear":
                 config_frame.database_input.setText("");
@@ -153,6 +156,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 config_frame.save_btn.setBackground(new Color(0,0,0));
                 break;
         }
+        run_frame.dispose();
         this.dispose();
     }//GEN-LAST:event_yes_btnActionPerformed
 

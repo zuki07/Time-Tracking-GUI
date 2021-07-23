@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -357,6 +359,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     
     private void pushProjectNames(){
         table_model.setNumRows(0);
+        System.out.println(records_map);
         for(int i=0; i<records_map.size(); i++){
             table_model.addRow(new Object[]{records_map.get(i).get("date"),
                                             records_map.get(i).get("start_time"),

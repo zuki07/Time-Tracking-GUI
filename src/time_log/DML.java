@@ -50,11 +50,6 @@ public class DML extends HandleTime{
     
     public void deleteType(String type){
         try {
-            
-            List list=getProjectsRecords(type);
-            for(int i=0;i<list.size();i++){
-                deleteProjectName(list.get(i).toString());
-            }
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
