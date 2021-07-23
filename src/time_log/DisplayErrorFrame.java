@@ -51,9 +51,9 @@ public class DisplayErrorFrame extends javax.swing.JFrame {
         getContentPane().add(ok_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 100, 40));
 
         error_txt.setBackground(new java.awt.Color(255, 51, 0));
-        error_txt.setFont(new java.awt.Font("Elephant", 1, 24)); // NOI18N
+        error_txt.setFont(new java.awt.Font("Elephant", 1, 20)); // NOI18N
         error_txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(error_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 590, 130));
+        getContentPane().add(error_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 640, 130));
 
         background.setBackground(new java.awt.Color(255, 51, 0));
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
