@@ -41,7 +41,7 @@ public class Time_log extends javax.swing.JFrame {
             dml.closeConnection();
             pushTypes(false);
             setDatabaseSize();
-            this.setTitle("Time log -- "+dml.getDatabase());
+            this.setTitle("Database: "+dml.getDatabase());
         } catch (SQLException ex) {
             showErrorStage(ex.toString());
         }
@@ -72,7 +72,6 @@ public class Time_log extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Time Logger");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -100,7 +99,7 @@ public class Time_log extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
 
         jTable1.setBackground(new java.awt.Color(0, 0, 0));
-        jTable1.setFont(new java.awt.Font("Elephant", 0, 14)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Elephant", 0, 16)); // NOI18N
         jTable1.setForeground(new java.awt.Color(0, 153, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,6 +118,7 @@ public class Time_log extends javax.swing.JFrame {
             }
         });
         jTable1.setFocusable(false);
+        jTable1.setMinimumSize(new java.awt.Dimension(100, 0));
         jTable1.setOpaque(false);
         jTable1.setRequestFocusEnabled(false);
         jTable1.setRowHeight(28);
@@ -133,6 +133,8 @@ public class Time_log extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(125);
+        jTable1.getColumnModel().getColumn(1).setMinWidth(100);
         ((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         for(int i=0; i<jTable1.getColumnCount(); i++){
             DefaultTableCellRenderer render = new DefaultTableCellRenderer();
@@ -272,14 +274,9 @@ public class Time_log extends javax.swing.JFrame {
 
     private void add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btnActionPerformed
         boolean is_empty=isEmpty(project_input),
-                is_valid=false,
                 is_all_match;
-        if(!is_empty){
-            is_valid=isValidSql(project_input);
-        }
-        else{
+        if(is_empty){
             showErrorStage("Enter something!");
-            return;
         }
         if(list!=null && !is_empty && menu_box.getSelectedItem().toString().compareTo("TYPES")!=0){
             is_all_match=isAllMatch(project_input);
@@ -290,17 +287,14 @@ public class Time_log extends javax.swing.JFrame {
             return;
         }
         
-        if(list!=null && is_valid && !is_all_match){
+        if(list!=null && !is_all_match){
             header_str="Are you sure you want to create: "+project_input.getText();
-            to_do_str="create_table";
+            to_do_str="create_project";
             drop_project=new ConfirmFrame(this, to_do_str, header_str);
             drop_project.setVisible(true);
         }
         else if(list!=null && is_all_match){
             showErrorStage(project_input.getText()+" already exsists in type "+dml.getTypeFromProject(project_input.getText()));
-        }
-        else if(!is_valid){
-            showErrorStage(project_input.getText()+" is not a valid table name <no spaces>");
         }
     }//GEN-LAST:event_add_btnActionPerformed
 
@@ -351,7 +345,6 @@ public class Time_log extends javax.swing.JFrame {
             showErrorStage("Enter something!");
         }
         else if(types_list!=null && !is_empty){
-            is_valid=isValidSql(type_input);
             is_match=isMatch(types_list, type_input);
         }
         
@@ -374,20 +367,15 @@ public class Time_log extends javax.swing.JFrame {
 
     private void type_dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type_dropActionPerformed
         drop_btn_selected=true;
-        boolean is_empty=isEmpty(type_input),
-                is_valid=false, is_match=false;
+        boolean is_empty=isEmpty(type_input), is_match=false;
         
         if(is_empty){
             showErrorStage("Enter something!");
         }
         if(types_list!=null && !is_empty){
-            is_valid=isValidSql(type_input);
-        }
-        if(types_list!=null && !is_empty && is_valid){
             is_match=isMatch(types_list, type_input);
         }
-        
-        if(!is_empty && types_list!=null && is_valid && is_match){
+        if(!is_empty && types_list!=null && is_match){
             header_str="Deleting "+type_input.getText()+" will also delete all projects. <br>Are you sure?";
             to_do_str="delete_type";
             drop_project=new ConfirmFrame(this, to_do_str, header_str);
@@ -396,7 +384,7 @@ public class Time_log extends javax.swing.JFrame {
         else if(!is_empty && types_list!=null && is_match){
             showErrorStage(type_input.getText()+" already exsists");
         }
-        else if(!is_empty && !is_valid && types_list!=null){
+        else if(!is_empty && types_list!=null){
             showErrorStage(type_input.getText()+" is not a valid table name <no spaces>");
         }
         else if(types_list==null){
@@ -511,18 +499,6 @@ public class Time_log extends javax.swing.JFrame {
         return value_match;
     }
     
-    private boolean isValidSql(JTextField input){
-        boolean valid=true;
-        String str=input.getText();
-        for(int i=0;i<str.length();i++){
-            if(str.charAt(i)==' '){
-                valid=false;
-                break;
-            }
-        }
-        return valid;
-    }
-    
     private void pushProjectNames(String project_type){
         table_model.setRowCount(0);
         list=dml.getProjectsRecords(project_type);
@@ -574,8 +550,6 @@ public class Time_log extends javax.swing.JFrame {
         type_drop.setVisible(true);
         display_type_changes=false;
     }
-    
-    
     
     private void showErrorStage(String error_str){
         DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str);
