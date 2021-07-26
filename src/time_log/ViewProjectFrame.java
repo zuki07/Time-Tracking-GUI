@@ -88,7 +88,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         project_label.setForeground(new java.awt.Color(0, 153, 255));
         project_label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         project_label.setOpaque(true);
-        jPanel1.add(project_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 40));
+        jPanel1.add(project_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 400, 40));
 
         total_header.setBackground(new java.awt.Color(0, 0, 0));
         total_header.setFont(new java.awt.Font("Elephant", 1, 18)); // NOI18N
