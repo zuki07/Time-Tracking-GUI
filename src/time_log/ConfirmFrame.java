@@ -123,6 +123,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.dml.insertType(type_input_lowercase);
                 log_frame.types_list.add(type_input_lowercase);
                 log_frame.menu_box.addItem(toCapitalize(type_input_lowercase));
+                log_frame.menu_box.setSelectedItem(toCapitalize(type_input_lowercase));
                 setDatabaseSize();
                 log_frame.table_model.setNumRows(0);
                 log_frame.type_input.setText("--TYPE OF PROJECT--");
