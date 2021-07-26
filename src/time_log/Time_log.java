@@ -278,7 +278,7 @@ public class Time_log extends javax.swing.JFrame {
         if(list!=null && !is_empty && menu_box.getSelectedItem().toString().compareTo("TYPES")!=0){
             is_all_match=isAllMatch(project_input);
         }
-        else if(list!=null && !is_empty && menu_box.getSelectedItem().toString().compareTo("TYPES")==0){
+        else if(!is_empty && menu_box.getSelectedItem().toString().compareTo("TYPES")==0){
             showErrorStage("Please select a project type from the drop down menu");
             project_input.setText("--PROJECT NAME--");
             return;
