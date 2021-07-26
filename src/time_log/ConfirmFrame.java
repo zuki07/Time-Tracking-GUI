@@ -36,6 +36,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
         this.to_do=to_do;
         this.header_str="<HTML>"+header_str+"<HTML>";
         header_label.setText(this.header_str);
+        run_frame=new RunningFrame();
     }
 
     /**

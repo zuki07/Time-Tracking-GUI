@@ -359,7 +359,6 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     
     private void pushProjectNames(){
         table_model.setNumRows(0);
-        System.out.println(records_map);
         for(int i=0; i<records_map.size(); i++){
             table_model.addRow(new Object[]{records_map.get(i).get("date"),
                                             records_map.get(i).get("start_time"),
