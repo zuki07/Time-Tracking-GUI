@@ -380,9 +380,6 @@ public class Time_log extends javax.swing.JFrame {
         else if(!is_empty && types_list!=null && is_match){
             showErrorStage(type_input.getText()+" already exsists");
         }
-        else if(!is_empty && types_list!=null){
-            showErrorStage(type_input.getText()+" is not a valid table name <no spaces>");
-        }
         else if(types_list==null){
             showErrorStage("Please configure a server");
         }
