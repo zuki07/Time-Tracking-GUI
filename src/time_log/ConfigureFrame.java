@@ -63,11 +63,6 @@ public class ConfigureFrame extends javax.swing.JFrame {
         port_input = new javax.swing.JTextField();
         test_btn = new javax.swing.JButton();
         close_btn = new javax.swing.JButton();
-        database_btn = new javax.swing.JButton();
-        password_btn = new javax.swing.JButton();
-        port_btn = new javax.swing.JButton();
-        username_btn = new javax.swing.JButton();
-        host_btn = new javax.swing.JButton();
         clear_btn = new javax.swing.JButton();
         save_btn = new javax.swing.JButton();
         background = new javax.swing.JLabel();
@@ -80,56 +75,56 @@ public class ConfigureFrame extends javax.swing.JFrame {
         database_label.setForeground(new java.awt.Color(0, 153, 255));
         database_label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         database_label.setText("Database");
-        getContentPane().add(database_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 34, 140, 40));
+        getContentPane().add(database_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 140, 40));
 
         username_label.setFont(new java.awt.Font("Elephant", 1, 18)); // NOI18N
         username_label.setForeground(new java.awt.Color(0, 153, 255));
         username_label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         username_label.setText("User Name");
-        getContentPane().add(username_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 105, 140, 40));
+        getContentPane().add(username_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 140, 40));
 
         password_label.setFont(new java.awt.Font("Elephant", 1, 18)); // NOI18N
         password_label.setForeground(new java.awt.Color(0, 153, 255));
         password_label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         password_label.setText("Password");
-        getContentPane().add(password_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, 140, 40));
+        getContentPane().add(password_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 140, 40));
 
         host_label.setFont(new java.awt.Font("Elephant", 1, 18)); // NOI18N
         host_label.setForeground(new java.awt.Color(0, 153, 255));
         host_label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         host_label.setText("Host");
-        getContentPane().add(host_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 235, 140, 40));
+        getContentPane().add(host_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 140, 40));
 
         port_label.setFont(new java.awt.Font("Elephant", 1, 18)); // NOI18N
         port_label.setForeground(new java.awt.Color(0, 153, 255));
         port_label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         port_label.setText("Port");
-        getContentPane().add(port_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 305, 140, 40));
+        getContentPane().add(port_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 140, 40));
 
         database_input.setBackground(new java.awt.Color(0, 153, 255));
         database_input.setFont(new java.awt.Font("Elephant", 0, 16)); // NOI18N
         database_input.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(database_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 36, 260, 40));
+        getContentPane().add(database_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 260, 40));
 
         username_input.setBackground(new java.awt.Color(0, 153, 255));
         username_input.setFont(new java.awt.Font("Elephant", 0, 16)); // NOI18N
         username_input.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 107, 260, 40));
+        getContentPane().add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 260, 40));
 
         password_input.setBackground(new java.awt.Color(0, 153, 255));
         password_input.setFont(new java.awt.Font("Elephant", 0, 16)); // NOI18N
         password_input.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(password_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 174, 260, 40));
+        getContentPane().add(password_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 260, 40));
 
         host_input.setBackground(new java.awt.Color(0, 153, 255));
         host_input.setFont(new java.awt.Font("Elephant", 0, 16)); // NOI18N
         host_input.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(host_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 237, 260, 40));
+        getContentPane().add(host_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 260, 40));
 
         port_input.setBackground(new java.awt.Color(0, 153, 255));
         port_input.setFont(new java.awt.Font("Elephant", 0, 16)); // NOI18N
         port_input.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(port_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 307, 260, 40));
+        getContentPane().add(port_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 260, 40));
 
         test_btn.setBackground(new java.awt.Color(0, 0, 0));
         test_btn.setFont(new java.awt.Font("Elephant", 1, 16)); // NOI18N
@@ -140,7 +135,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
                 test_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(test_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 379, 100, 60));
+        getContentPane().add(test_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 100, 60));
 
         close_btn.setBackground(new java.awt.Color(0, 0, 0));
         close_btn.setFont(new java.awt.Font("Elephant", 1, 16)); // NOI18N
@@ -151,62 +146,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
                 close_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 457, 125, 56));
-
-        database_btn.setBackground(new java.awt.Color(0, 0, 0));
-        database_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
-        database_btn.setForeground(new java.awt.Color(0, 153, 255));
-        database_btn.setText("SET");
-        database_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                database_btnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(database_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 36, -1, 40));
-
-        password_btn.setBackground(new java.awt.Color(0, 0, 0));
-        password_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
-        password_btn.setForeground(new java.awt.Color(0, 153, 255));
-        password_btn.setText("SET");
-        password_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                password_btnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(password_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 174, -1, 40));
-
-        port_btn.setBackground(new java.awt.Color(0, 0, 0));
-        port_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
-        port_btn.setForeground(new java.awt.Color(0, 153, 255));
-        port_btn.setText("SET");
-        port_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                port_btnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(port_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 307, -1, 40));
-
-        username_btn.setBackground(new java.awt.Color(0, 0, 0));
-        username_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
-        username_btn.setForeground(new java.awt.Color(0, 153, 255));
-        username_btn.setText("SET");
-        username_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                username_btnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(username_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 107, -1, 40));
-
-        host_btn.setBackground(new java.awt.Color(0, 0, 0));
-        host_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
-        host_btn.setForeground(new java.awt.Color(0, 153, 255));
-        host_btn.setText("SET");
-        host_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                host_btnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(host_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 237, -1, 40));
+        getContentPane().add(close_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, 125, 56));
 
         clear_btn.setBackground(new java.awt.Color(0, 0, 0));
         clear_btn.setFont(new java.awt.Font("Elephant", 1, 16)); // NOI18N
@@ -217,7 +157,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
                 clear_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(clear_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 531, 125, 41));
+        getContentPane().add(clear_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 530, 125, 41));
 
         save_btn.setBackground(new java.awt.Color(0, 0, 0));
         save_btn.setFont(new java.awt.Font("Elephant", 1, 16)); // NOI18N
@@ -228,11 +168,11 @@ public class ConfigureFrame extends javax.swing.JFrame {
                 save_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 379, 100, 60));
+        getContentPane().add(save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 100, 60));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/time_log/background.jpg"))); // NOI18N
         background.setText("jLabel1");
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 590));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 590));
 
         pack();
         setLocationRelativeTo(null);
@@ -256,11 +196,6 @@ public class ConfigureFrame extends javax.swing.JFrame {
             try {
                 log_frame.dml.testConnection(test_map);
                 test_btn.setBackground(new Color(51, 255, 51));
-                database_btn.setBackground(new Color(0, 0, 0));
-                username_btn.setBackground(new Color(0, 0, 0));
-                password_btn.setBackground(new Color(0, 0, 0));
-                host_btn.setBackground(new Color(0, 0, 0));
-                port_btn.setBackground(new Color(0, 0, 0));
                 error_with_connection=false;
             } catch (SQLException ex) {
                 error_with_connection=true;
@@ -277,36 +212,6 @@ public class ConfigureFrame extends javax.swing.JFrame {
         confirm_frame.setVisible(true);
     }//GEN-LAST:event_clear_btnActionPerformed
 
-    private void database_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_database_btnActionPerformed
-        data_map.put("database", database_input.getText());
-        database_btn.setBackground(new Color(51, 255, 51));
-        is_saved=false;
-    }//GEN-LAST:event_database_btnActionPerformed
-
-    private void username_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username_btnActionPerformed
-        data_map.put("username", username_input.getText());
-        username_btn.setBackground(new Color(51, 255, 51));
-        is_saved=false;
-    }//GEN-LAST:event_username_btnActionPerformed
-
-    private void password_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password_btnActionPerformed
-        data_map.put("password", password_input.getText());
-        password_btn.setBackground(new Color(51, 255, 51));
-        is_saved=false;
-    }//GEN-LAST:event_password_btnActionPerformed
-
-    private void host_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_host_btnActionPerformed
-        data_map.put("host", host_input.getText());
-        host_btn.setBackground(new Color(51, 255, 51));
-        is_saved=false;
-    }//GEN-LAST:event_host_btnActionPerformed
-
-    private void port_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_port_btnActionPerformed
-        data_map.put("port", port_input.getText());
-        port_btn.setBackground(new Color(51, 255, 51));
-        is_saved=false;
-    }//GEN-LAST:event_port_btnActionPerformed
-
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         if(is_tested && !error_with_connection){
             log_frame.dml.replaceValuesMap(test_map);
@@ -314,7 +219,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
             log_frame.pushTypes(false);
             writeData();
             save_btn.setBackground(new Color(51, 255, 51));
-            log_frame.setTitle("Time log -- "+log_frame.dml.getDatabase());
+            log_frame.setTitle("Database: "+log_frame.dml.getDatabase());
             error_with_connection=false;
             error_with_connection=true;
             changes_made=false;
@@ -439,21 +344,16 @@ public class ConfigureFrame extends javax.swing.JFrame {
     private javax.swing.JLabel background;
     public javax.swing.JButton clear_btn;
     public javax.swing.JButton close_btn;
-    public javax.swing.JButton database_btn;
     public javax.swing.JTextField database_input;
     private javax.swing.JLabel database_label;
-    public javax.swing.JButton host_btn;
     public javax.swing.JTextField host_input;
     private javax.swing.JLabel host_label;
-    public javax.swing.JButton password_btn;
     public javax.swing.JTextField password_input;
     private javax.swing.JLabel password_label;
-    public javax.swing.JButton port_btn;
     public javax.swing.JTextField port_input;
     private javax.swing.JLabel port_label;
     public javax.swing.JButton save_btn;
     public javax.swing.JButton test_btn;
-    public javax.swing.JButton username_btn;
     public javax.swing.JTextField username_input;
     private javax.swing.JLabel username_label;
     // End of variables declaration//GEN-END:variables

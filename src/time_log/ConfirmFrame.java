@@ -145,15 +145,10 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 break;
             case "clear":
                 config_frame.database_input.setText("");
-                config_frame.database_btn.setBackground(new Color(0, 0, 0));
                 config_frame.username_input.setText("");
-                config_frame.username_btn.setBackground(new Color(0, 0, 0));
                 config_frame.password_input.setText("");
-                config_frame.password_btn.setBackground(new Color(0, 0, 0));
                 config_frame.host_input.setText("");
-                config_frame.host_btn.setBackground(new Color(0, 0, 0));
                 config_frame.port_input.setText("");
-                config_frame.port_btn.setBackground(new Color(0, 0, 0));
                 config_frame.test_btn.setBackground(new Color(0,0,0));
                 config_frame.save_btn.setBackground(new Color(0,0,0));
                 break;
