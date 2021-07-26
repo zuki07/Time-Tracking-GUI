@@ -97,7 +97,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
     private void yes_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yes_btnActionPerformed
         run_frame.setVisible(true);
         switch (to_do){
-            case "drop_click":
+            case "delete_project_click":
                 log_frame.dml.deleteProjectName(log_frame.jTable1.getValueAt(log_frame.jTable1.getSelectedRow(), 0).toString().toLowerCase());
                 log_frame.list.remove(log_frame.jTable1.getSelectedRow());
                 log_frame.table_model.removeRow(log_frame.jTable1.getSelectedRow());
@@ -105,7 +105,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 setDatabaseSize();
                 log_frame.project_input.setText("--PROJECT NAME--");
                 break;
-            case "drop_input":
+            case "delete_project_input":
                 log_frame.dml.deleteProjectName(project_input_lowercase);
                 log_frame.table_model.removeRow(log_frame.list.indexOf(project_input_lowercase));
                 log_frame.list.remove(project_input_lowercase);

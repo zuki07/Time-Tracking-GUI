@@ -162,19 +162,19 @@ public class Time_log extends javax.swing.JFrame {
                 add_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(add_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 90, 36));
+        getContentPane().add(add_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, 90, 36));
         add_btn.getAccessibleContext().setAccessibleName("add_btn");
 
         drop_btn.setBackground(new java.awt.Color(0, 0, 0));
         drop_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
         drop_btn.setForeground(new java.awt.Color(242, 5, 48));
-        drop_btn.setText("DROP");
+        drop_btn.setText("DELETE");
         drop_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drop_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(drop_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, 90, 36));
+        getContentPane().add(drop_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 510, 110, 36));
         drop_btn.getAccessibleContext().setAccessibleName("drop_btn");
 
         project_input.setBackground(new java.awt.Color(0, 153, 255));
@@ -186,7 +186,7 @@ public class Time_log extends javax.swing.JFrame {
                 project_inputFocusGained(evt);
             }
         });
-        getContentPane().add(project_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 465, 200, 30));
+        getContentPane().add(project_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 465, 230, 30));
         project_input.getAccessibleContext().setAccessibleName("");
 
         mb_label.setFont(new java.awt.Font("Elephant", 1, 20)); // NOI18N
@@ -302,14 +302,14 @@ public class Time_log extends javax.swing.JFrame {
         drop_btn_selected=true;
         boolean is_empty=isEmpty(project_input);
         if(jTable1.isColumnSelected(0)){
-            header_str="Are you sure you want to drop: "+jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-            to_do_str="drop_click";
+            header_str="Are you sure you want to delete: "+jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+            to_do_str="delete_project_click";
             drop_project=new ConfirmFrame(this, to_do_str, header_str);
             drop_project.setVisible(true);
         }
         else if(!is_empty && list!=null && isMatch(list, project_input)){
             header_str="Are you sure you want to drop: "+project_input.getText();
-            to_do_str="drop_input";
+            to_do_str="delete_project_input";
             drop_project=new ConfirmFrame(this, to_do_str, header_str);
             drop_project.setVisible(true);
         }
