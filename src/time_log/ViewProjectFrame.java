@@ -3,11 +3,10 @@ package time_log;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -21,6 +20,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     String project_name;
     Timer timer;
     double timer_counter=1;
+    int row, column;
     boolean saved=true;
     DefaultTableModel table_model;
     Map <Integer, Map<String,String>> records_map; 
@@ -214,6 +214,11 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         jTable1.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setShowGrid(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         ((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         int columns=jTable1.getColumnCount();
@@ -316,8 +321,19 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_start_btnActionPerformed
 
     private void delete_row_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_row_btnActionPerformed
-        // TODO add your handling code here:
+        System.out.println(row);
+        if(table_model.getRowCount()>0){
+            String header_str="Are you sure you want to delete project data?";
+            String to_do_str="delete_project_data";
+            ConfirmFrame delete_project_data=new ConfirmFrame(this, to_do_str, header_str);
+            delete_project_data.setVisible(true);
+        }
     }//GEN-LAST:event_delete_row_btnActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        Point point=evt.getPoint();
+        this.row=jTable1.rowAtPoint(point);
+    }//GEN-LAST:event_jTable1MouseClicked
     
         
     /**

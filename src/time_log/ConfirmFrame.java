@@ -9,6 +9,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
     Time_log log_frame;
     RunningFrame run_frame;
     ConfigureFrame config_frame;
+    ViewProjectFrame view_project_frame;
     String to_do, header_str, project_input_lowercase, type_input_lowercase;
     
     
@@ -33,6 +34,15 @@ public class ConfirmFrame extends javax.swing.JFrame {
     public ConfirmFrame(ConfigureFrame config_frame, String to_do, String header_str){
         initComponents();
         this.config_frame=config_frame;
+        this.to_do=to_do;
+        this.header_str="<HTML>"+header_str+"<HTML>";
+        header_label.setText(this.header_str);
+        run_frame=new RunningFrame();
+    }
+    
+    public ConfirmFrame(ViewProjectFrame view_project_frame,String to_do, String header_str){
+        initComponents();
+        this.view_project_frame=view_project_frame;
         this.to_do=to_do;
         this.header_str="<HTML>"+header_str+"<HTML>";
         header_label.setText(this.header_str);
@@ -142,6 +152,10 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 setDatabaseSize();
                 log_frame.type_input.setText("--TYPE OF PROJECT--");
                 log_frame.hideTypeTools();
+                break;
+            case "delete_project_data":
+                view_project_frame.time_log_stage.dml.deleteProjectData(view_project_frame.row);
+                view_project_frame.table_model.removeRow(view_project_frame.row);
                 break;
             case "clear":
                 config_frame.database_input.setText("");

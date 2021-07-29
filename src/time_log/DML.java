@@ -145,6 +145,20 @@ public class DML extends HandleTime{
         return project_list;
     }
     
+    public void deleteProjectData(int row){
+        try {
+            first_connection=false;
+            con=startConnection(first_connection);
+            stmt=con.createStatement();
+            String query=String.format("DELETE FROM projects_data where project_name = '%s' AND row_number = %d", table_name, row);
+            stmt.executeUpdate(query);
+            stmt.close();
+            closeConnection();
+        } catch (SQLException ex) {
+            showErrorStage(ex.toString());
+        }
+    }
+    
     public void setTotalTime(String total_string){
         total_str=total_string;
     }

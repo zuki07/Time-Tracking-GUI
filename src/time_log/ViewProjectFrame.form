@@ -345,6 +345,9 @@
                 <Property name="selectionMode" type="int" value="0"/>
                 <Property name="showGrid" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xd;&#xa;int columns=jTable1.getColumnCount();&#xd;&#xa;for(int i=0; i&lt;columns; i++){&#xd;&#xa;    DefaultTableCellRenderer render=new DefaultTableCellRenderer();&#xd;&#xa;    render.setHorizontalAlignment(SwingConstants.CENTER);&#xd;&#xa;    jTable1.getColumnModel().getColumn(i).setCellRenderer(render);&#xd;&#xa;    render.setBackground(new Color(0,0,0,175));&#xd;&#xa;    render.setForeground(new Color(0,153,255));&#xd;&#xa;    jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);&#xd;&#xa;    jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));&#xd;&#xa;}&#xd;&#xa;jTable1.setOpaque(false);&#xd;&#xa;"/>
               </AuxValues>
