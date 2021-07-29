@@ -155,7 +155,8 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 log_frame.hideTypeTools();
                 break;
             case "delete_project_data":
-                String project_duration=view_project_frame.time_log_stage.dml.getRecordDuration(view_project_frame.row);
+                int project_row=view_project_frame.row;
+                String project_duration=view_project_frame.time_log_stage.dml.getRecordDuration(project_row);
                 int[] project_duration_array=tokenize(project_duration);
                 int update_hour, update_min;
                 
@@ -172,7 +173,8 @@ public class ConfirmFrame extends javax.swing.JFrame {
                     String update_time_str=update_hour+":"+update_min;
                     view_project_frame.time_log_stage.dml.updateRecordTotalTime(i, update_time_str);
                 }
-                view_project_frame.time_log_stage.dml.deleteProjectData(view_project_frame.row);
+                
+                view_project_frame.time_log_stage.dml.deleteProjectData(project_row);
                 view_project_frame.setProjectName(project_input_lowercase);
                 view_project_frame.pushProjectNames();
                 break;

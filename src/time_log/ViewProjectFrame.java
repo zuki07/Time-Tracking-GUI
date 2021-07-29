@@ -322,7 +322,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
 
     private void delete_row_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_row_btnActionPerformed
         if(table_model.getRowCount()>0){
-            String header_str="Are you sure you want to delete project data?";
+            String header_str="Are you sure you want to delete the selected project record?";
             String to_do_str="delete_project_data";
             ConfirmFrame delete_project_data=new ConfirmFrame(this, to_do_str, header_str);
             delete_project_data.setVisible(true);
