@@ -26,7 +26,7 @@ public class Time_log extends javax.swing.JFrame {
     boolean value_match=false, drop_btn_selected=false, display_type_changes=true;
     DefaultTableModel table_model;
     ConfirmFrame drop_project;
-    String header_str, to_do_str, input_str, database_value, database_size;
+    String header_str, to_do_str, input_str, database_value, database_size, project_name;
     ViewProjectFrame project_frame;
     
     /**
@@ -412,7 +412,7 @@ public class Time_log extends javax.swing.JFrame {
         int row=jTable1.rowAtPoint(point);
         int column=jTable1.columnAtPoint(point);
         if(column==2){
-            String project_name=jTable1.getValueAt(row, 0).toString().toLowerCase();
+            project_name=jTable1.getValueAt(row, 0).toString().toLowerCase();
             project_frame.setProjectName(project_name);
             this.setVisible(false);
             project_frame.setVisible(true);

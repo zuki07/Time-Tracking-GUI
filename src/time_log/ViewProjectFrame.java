@@ -321,7 +321,6 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_start_btnActionPerformed
 
     private void delete_row_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_row_btnActionPerformed
-        System.out.println(row);
         if(table_model.getRowCount()>0){
             String header_str="Are you sure you want to delete project data?";
             String to_do_str="delete_project_data";
@@ -395,7 +394,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         return timer;
     }
     
-    private void pushProjectNames(){
+    public void pushProjectNames(){
         table_model.setNumRows(0);
         for(int i=0; i<records_map.size(); i++){
             table_model.addRow(new Object[]{records_map.get(i).get("date"),

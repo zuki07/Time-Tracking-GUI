@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class DML extends HandleTime{
@@ -152,6 +154,8 @@ public class DML extends HandleTime{
             stmt=con.createStatement();
             String query=String.format("DELETE FROM projects_data where project_name = '%s' AND row_number = %d", table_name, row);
             stmt.executeUpdate(query);
+            query=String.format("UPDATE projects_data SET row_number = row_number-1 where project_name = '%s' and row_number > %d", table_name, row-1);
+            stmt.executeUpdate(query);
             stmt.close();
             closeConnection();
         } catch (SQLException ex) {
@@ -163,13 +167,64 @@ public class DML extends HandleTime{
         total_str=total_string;
     }
     
-//    @Override
+    public String getRecordDuration(int row){
+        String project_duration="";
+        try {
+            first_connection=false;
+            con=startConnection(first_connection);
+            stmt=con.createStatement();
+            ResultSet rs_data=stmt.executeQuery(String.format("SELECT duration from projects_data where project_name = '%s' AND row_number = %d", table_name, row));
+            while(rs_data.next()){
+                project_duration=rs_data.getString("duration");
+            }
+            rs_data.close();
+            stmt.close();
+            closeConnection();
+        } catch (SQLException ex) {
+            showErrorStage(ex.toString());
+        }
+        return project_duration;
+    }
+    
+    public String getRecordTotalTime(int row){
+        String project_total_time="";
+        try {
+            first_connection=false;
+            con=startConnection(first_connection);
+            stmt=con.createStatement();
+            ResultSet rs_data=stmt.executeQuery(String.format("SELECT total_time from projects_data where project_name = '%s' AND row_number = %d", table_name, row));
+            while(rs_data.next()){
+                project_total_time=rs_data.getString("total_time");
+            }
+            rs_data.close();
+            stmt.close();
+            closeConnection();
+        } catch (SQLException ex) {
+            showErrorStage(ex.toString());
+        }
+        return project_total_time;
+    }
+    
+    public void updateRecordTotalTime(int row, String new_total_time){
+        try {
+            first_connection=false;
+            con=startConnection(first_connection);
+            stmt=con.createStatement();
+            String query=String.format("UPDATE projects_data SET total_time = '%s' where project_name = '%s' and row_number = %d", new_total_time, table_name, row);
+            stmt.executeUpdate(query);
+            stmt.close();
+            closeConnection();
+        } catch (SQLException ex) {
+            showErrorStage(ex.toString());
+        }
+    }
+    
     public String getTotalTime(String table_name){
         try {
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet rs_total=stmt.executeQuery("Select total_time from projects_data where project_name = '"+table_name+"' order by total_time desc limit 1");
+            ResultSet rs_total=stmt.executeQuery("Select total_time from projects_data where project_name = '"+table_name+"' order by end_time desc limit 1");
             total_str="";
             while(rs_total.next()){
                 total_str=rs_total.getString("total_time");
