@@ -81,13 +81,13 @@ public class DML extends HandleTime{
         }
     }
     
-    public void insertProjectRecords(){
+    public void insertProjectRecords(int row_number){
         try {
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query=String.format("INSERT INTO projects_data (project_name, date, start_time, end_time, duration, total_time) "+
-                    "VALUES ('%s','%s', '%s', '%s', '%s', '%s')",table_name,start_date,start_str,end_str,duration_str,total_str);
+            String query=String.format("INSERT INTO projects_data (project_name, date, start_time, end_time, duration, total_time, row_number) "+
+                    "VALUES ('%s','%s', '%s', '%s', '%s', '%s', '%d')",table_name,start_date,start_str,end_str,duration_str,total_str, row_number);
             stmt.executeUpdate(query);
             stmt.close();
             closeConnection();
