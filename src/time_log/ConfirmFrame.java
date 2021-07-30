@@ -2,6 +2,8 @@
 package time_log;
 
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ConfirmFrame extends javax.swing.JFrame {
@@ -158,22 +160,21 @@ public class ConfirmFrame extends javax.swing.JFrame {
                 int project_row=view_project_frame.row;
                 String project_duration=view_project_frame.time_log_stage.dml.getRecordDuration(project_row);
                 int[] project_duration_array=tokenize(project_duration);
-                int update_hour, update_min;
-                
-                for(int i=view_project_frame.row+1; i<view_project_frame.table_model.getRowCount(); i++){
-                    String record_time_str=view_project_frame.time_log_stage.dml.getRecordTotalTime(i);
-                    int[] row_time_array=tokenize(record_time_str);
-                    update_hour=row_time_array[0]-project_duration_array[0];
+                Map<Integer, String> map=new HashMap();
+                map.putAll(view_project_frame.time_log_stage.dml.getRecordTotalTime(project_row));
+                map.forEach((key,value)->{
+                    int[] row_time_array=tokenize(value);
+                    int update_min;
+                    int update_hour=row_time_array[0]-project_duration_array[0];
                     if(row_time_array[1]>project_duration_array[1]){
                         update_min=row_time_array[1]-project_duration_array[1];
                     }
                     else{
                         update_min=project_duration_array[1]-row_time_array[1];
                     }
-                    String update_time_str=update_hour+":"+update_min;
-                    view_project_frame.time_log_stage.dml.updateRecordTotalTime(i, update_time_str);
-                }
-                
+                    map.replace(key, update_hour+":"+update_min);
+                });
+                view_project_frame.time_log_stage.dml.updateRecordTotalTime(map, project_input_lowercase);
                 view_project_frame.time_log_stage.dml.deleteProjectData(project_row);
                 view_project_frame.setProjectName(project_input_lowercase);
                 view_project_frame.pushProjectNames();

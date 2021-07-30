@@ -186,15 +186,15 @@ public class DML extends HandleTime{
         return project_duration;
     }
     
-    public String getRecordTotalTime(int row){
-        String project_total_time="";
+    public Map getRecordTotalTime(int row){
+        Map<Integer, String> row_total_time_map=new HashMap();
         try {
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet rs_data=stmt.executeQuery(String.format("SELECT total_time from projects_data where project_name = '%s' AND row_number = %d", table_name, row));
+            ResultSet rs_data=stmt.executeQuery(String.format("SELECT row_number, total_time FROM projects_data WHERE project_name = '%s' AND row_number > %d", table_name, row-1));
             while(rs_data.next()){
-                project_total_time=rs_data.getString("total_time");
+                row_total_time_map.put(rs_data.getInt("row_number"), rs_data.getString("total_time"));
             }
             rs_data.close();
             stmt.close();
@@ -202,16 +202,22 @@ public class DML extends HandleTime{
         } catch (SQLException ex) {
             showErrorStage(ex.toString());
         }
-        return project_total_time;
+        return row_total_time_map;
     }
     
-    public void updateRecordTotalTime(int row, String new_total_time){
+    public void updateRecordTotalTime(Map<Integer, String> map, String table_name){
         try {
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query=String.format("UPDATE projects_data SET total_time = '%s' where project_name = '%s' and row_number = %d", new_total_time, table_name, row);
-            stmt.executeUpdate(query);
+            map.forEach((key,value)->{
+                String query=String.format("UPDATE projects_data SET total_time = '%s' where project_name = '%s' and row_number = %d", value, table_name, key);
+                try {
+                    stmt.executeUpdate(query);
+                } catch (SQLException ex) {
+                    Logger.getLogger(DML.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
             stmt.close();
             closeConnection();
         } catch (SQLException ex) {
