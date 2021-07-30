@@ -73,7 +73,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
         header_label.setFont(new java.awt.Font("Elephant", 1, 24)); // NOI18N
         header_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         header_label.setText("jLabel1");
-        getContentPane().add(header_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 680, 57));
+        getContentPane().add(header_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 600, 70));
 
         yes_btn.setBackground(new java.awt.Color(51, 255, 51));
         yes_btn.setFont(new java.awt.Font("Elephant", 1, 16)); // NOI18N
