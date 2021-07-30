@@ -12,7 +12,8 @@ CREATE TABLE project_names (
 );
 
 CREATE TABLE projects_data ( 
-	project_name VARCHAR(40) NULL DEFAULT NULL , 
+	project_name VARCHAR(40) NULL DEFAULT NULL ,
+	row_number INT(4) NULL DEFAULT NULL ,
 	date DATE NULL DEFAULT NULL , 
 	start_time VARCHAR(10) NULL DEFAULT NULL , 
 	end_time VARCHAR(10) NULL DEFAULT NULL , 
