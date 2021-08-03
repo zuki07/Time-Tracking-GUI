@@ -230,7 +230,7 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet rs_total=stmt.executeQuery("Select total_time from projects_data where project_name = '"+table_name+"' order by end_time desc limit 1");
+            ResultSet rs_total=stmt.executeQuery("Select total_time from projects_data where project_name = '"+table_name+"' order by row_number desc limit 1");
             total_str="";
             while(rs_total.next()){
                 total_str=rs_total.getString("total_time");
