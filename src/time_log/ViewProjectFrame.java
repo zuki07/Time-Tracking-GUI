@@ -310,14 +310,16 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_stop_btnActionPerformed
 
     private void start_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_btnActionPerformed
-        timer.start();
-        handle_time.timeStart();
-        handle_time.startDate();
-        start_time_label.setVisible(true);
-        start_time_label.setText(time_log_stage.dml.getTimeStart());
-        end_time_label.setVisible(false);
-        buttonClickedColor("start");
-        saved=false;
+        if(saved){
+            timer.start();
+            handle_time.timeStart();
+            handle_time.startDate();
+            start_time_label.setVisible(true);
+            start_time_label.setText(time_log_stage.dml.getTimeStart());
+            end_time_label.setVisible(false);
+            buttonClickedColor("start");
+            saved=false;
+        }
     }//GEN-LAST:event_start_btnActionPerformed
 
     private void delete_row_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_row_btnActionPerformed
