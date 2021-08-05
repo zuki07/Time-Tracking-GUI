@@ -74,7 +74,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Project Time Keeper");
+        setTitle("Project Time Tracker");
         setBackground(new java.awt.Color(102, 153, 255));
         setIconImages(null);
         setSize(new java.awt.Dimension(800, 750));

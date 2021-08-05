@@ -509,7 +509,6 @@ public class Time_log extends javax.swing.JFrame {
     
     public void pushTypes(boolean first_connection){
         types_list=dml.getProjectTypes(first_connection);
-        System.out.println(types_list);
         int itmes_num=menu_box.getItemCount();
         for(int i=0;i<itmes_num;i++){
             if(i!=0){

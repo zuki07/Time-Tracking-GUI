@@ -67,7 +67,8 @@ public class HandleTime extends SqlConnection{
         this.time_duration=time_end.minusHours(time_start.getHour()).minusMinutes(time_start.getMinute());
         duration_hr=time_duration.getHour();
         duration_min=time_duration.getMinute();
-        duration_str=duration_hr+":"+duration_min;
+        String duration_min_str=intUnderTen(duration_min);
+        duration_str=duration_hr+":"+duration_min_str;
     }
     
     public String getDuration(){
@@ -84,15 +85,28 @@ public class HandleTime extends SqlConnection{
                 total_hr++;
                 total_min=total_min-60;
             }
-            total_str=String.format("%s:%s",total_hr,total_min);
+            String total_min_str=intUnderTen(total_min);
+            total_str=total_hr+":"+total_min_str;
         }
         else{
-            total_str=String.format("%s:%s",this.duration_hr,this.duration_min);
+            String duration_min_str=intUnderTen(this.duration_min);
+            total_str=this.duration_hr+":"+duration_min_str;
         }
         dml.setTotalTime(total_str);
     }
     
     public String getTotalTime(){
         return total_str;
+    }
+    
+    public String intUnderTen(int test_num){
+        String num_str;
+        if(test_num>=10){
+            num_str=String.format("%s", test_num);
+        }
+        else{
+            num_str="0"+test_num;
+        }
+        return num_str;
     }
 }
