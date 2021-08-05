@@ -27,7 +27,7 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query=String.format("INSERT INTO project_names VALUES ('%s', '%s')", types_str, table_name);
+            String query=String.format("INSERT INTO projectNames VALUES ('%s', '%s')", types_str, table_name);
             stmt.executeUpdate(query);
             stmt.close();
             closeConnection();
@@ -72,9 +72,9 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query="DELETE FROM projects_data where project_name = '"+table_name+"'";
+            String query="DELETE FROM projectsData where project_name = '"+table_name+"'";
             stmt.executeUpdate(query);
-            query="DELETE FROM project_names where project_names = '"+table_name+"'";
+            query="DELETE FROM projectNames where project_names = '"+table_name+"'";
             stmt.executeUpdate(query);
             stmt.close();
             closeConnection();
@@ -88,7 +88,7 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query=String.format("INSERT INTO projects_data (project_name, date, start_time, end_time, duration, total_time, row_number) "+
+            String query=String.format("INSERT INTO projectsData (project_name, date, start_time, end_time, duration, total_time, row_number) "+
                     "VALUES ('%s','%s', '%s', '%s', '%s', '%s', '%d')",table_name,start_date,start_str,end_str,duration_str,total_str, row_number);
             stmt.executeUpdate(query);
             stmt.close();
@@ -101,7 +101,7 @@ public class DML extends HandleTime{
     public Map readProjectRecords(){
         try {
             String query2="SELECT date, start_time, end_time, duration, total_time " +
-                            "from projects_data where project_name = '"+table_name+"'";
+                            "FROM projectsData WHERE project_name = '"+table_name+"'";
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.prepareStatement(query2);
@@ -133,8 +133,7 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet project_names=stmt.executeQuery("SELECT project_names FROM types join project_names on types.project_types = project_names.project_types "
-                                        + "WHERE project_names.project_types = '"+type_table+"'");
+            ResultSet project_names=stmt.executeQuery("SELECT project_names from projectNames WHERE project_types = '"+type_table+"'");
             while(project_names.next()){
                 project_list.add(project_names.getString(1));
             }
@@ -152,9 +151,9 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query=String.format("DELETE FROM projects_data where project_name = '%s' AND row_number = %d", table_name, row);
+            String query=String.format("DELETE FROM projectsData where project_name = '%s' AND row_number = %d", table_name, row);
             stmt.executeUpdate(query);
-            query=String.format("UPDATE projects_data SET row_number = row_number-1 where project_name = '%s' and row_number > %d", table_name, row-1);
+            query=String.format("UPDATE projectsData SET row_number = row_number-1 where project_name = '%s' and row_number > %d", table_name, row-1);
             stmt.executeUpdate(query);
             stmt.close();
             closeConnection();
@@ -173,7 +172,7 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet rs_data=stmt.executeQuery(String.format("SELECT duration from projects_data where project_name = '%s' AND row_number = %d", table_name, row));
+            ResultSet rs_data=stmt.executeQuery(String.format("SELECT duration from projectsData where project_name = '%s' AND row_number = %d", table_name, row));
             while(rs_data.next()){
                 project_duration=rs_data.getString("duration");
             }
@@ -192,7 +191,7 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet rs_data=stmt.executeQuery(String.format("SELECT row_number, total_time FROM projects_data WHERE project_name = '%s' AND row_number > %d", table_name, row-1));
+            ResultSet rs_data=stmt.executeQuery(String.format("SELECT row_number, total_time FROM projectsData WHERE project_name = '%s' AND row_number > %d", table_name, row-1));
             while(rs_data.next()){
                 row_total_time_map.put(rs_data.getInt("row_number"), rs_data.getString("total_time"));
             }
@@ -211,7 +210,7 @@ public class DML extends HandleTime{
             con=startConnection(first_connection);
             stmt=con.createStatement();
             map.forEach((key,value)->{
-                String query=String.format("UPDATE projects_data SET total_time = '%s' where project_name = '%s' and row_number = %d", value, table_name, key);
+                String query=String.format("UPDATE projectsData SET total_time = '%s' where project_name = '%s' and row_number = %d", value, table_name, key);
                 try {
                     stmt.executeUpdate(query);
                 } catch (SQLException ex) {
@@ -230,7 +229,7 @@ public class DML extends HandleTime{
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet rs_total=stmt.executeQuery("Select total_time from projects_data where project_name = '"+table_name+"' order by row_number desc limit 1");
+            ResultSet rs_total=stmt.executeQuery("Select total_time from projectsData where project_name = '"+table_name+"' order by row_number desc limit 1");
             total_str="";
             while(rs_total.next()){
                 total_str=rs_total.getString("total_time");
@@ -250,7 +249,7 @@ public class DML extends HandleTime{
         try {
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet all_projects=stmt.executeQuery("SELECT project_names from project_names");
+            ResultSet all_projects=stmt.executeQuery("SELECT project_names from projectNames");
             while(all_projects.next()){
                 all_projects_list.add(all_projects.getString(1));
             }
@@ -269,7 +268,7 @@ public class DML extends HandleTime{
         try {
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            ResultSet all_projects=stmt.executeQuery("SELECT project_types from project_names where project_names = '"+project_name+"'");
+            ResultSet all_projects=stmt.executeQuery("SELECT project_types from projectNames where project_names = '"+project_name+"'");
             while(all_projects.next()){
                 type=all_projects.getString(1);
             }

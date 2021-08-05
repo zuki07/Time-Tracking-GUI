@@ -4,14 +4,14 @@ CREATE TABLE types (
 	project_types VARCHAR(40) PRIMARY KEY
 );
 
-CREATE TABLE project_names (
+CREATE TABLE projectNames (
 	project_types VARCHAR(40),
 	project_names VARCHAR(40),
 	PRIMARY KEY (project_names), 
 	FOREIGN KEY (project_types) REFERENCES types (project_types)
 );
 
-CREATE TABLE projects_data ( 
+CREATE TABLE projectsData ( 
 	project_name VARCHAR(40) NULL DEFAULT NULL ,
 	row_number INT(4) NULL DEFAULT NULL ,
 	date DATE NULL DEFAULT NULL , 
