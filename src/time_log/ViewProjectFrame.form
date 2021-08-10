@@ -15,7 +15,7 @@
     </Property>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="formSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-47,0,0,3,48"/>
+    <SyntheticProperty name="formSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-47,0,0,3,46"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="0"/>
     <SyntheticProperty name="generateSize" type="boolean" value="true"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
@@ -306,7 +306,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="50" y="157" width="690" height="450"/>
+              <AbsoluteConstraints x="10" y="157" width="780" height="450"/>
             </Constraint>
           </Constraints>
 
@@ -325,7 +325,8 @@
                   <Color blue="ff" green="99" red="0" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="0">
+                  <Table columnCount="6" rowCount="0">
+                    <Column editable="false" title="ROW #" type="java.lang.Object"/>
                     <Column editable="false" title="DATE" type="java.lang.Object"/>
                     <Column editable="false" title="START TIME" type="java.lang.Object"/>
                     <Column editable="false" title="END TIME" type="java.lang.Object"/>
@@ -349,7 +350,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xd;&#xa;int columns=jTable1.getColumnCount();&#xd;&#xa;for(int i=0; i&lt;columns; i++){&#xd;&#xa;    DefaultTableCellRenderer render=new DefaultTableCellRenderer();&#xd;&#xa;    render.setHorizontalAlignment(SwingConstants.CENTER);&#xd;&#xa;    jTable1.getColumnModel().getColumn(i).setCellRenderer(render);&#xd;&#xa;    render.setBackground(new Color(0,0,0,175));&#xd;&#xa;    render.setForeground(new Color(0,153,255));&#xd;&#xa;    jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);&#xd;&#xa;    jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));&#xd;&#xa;}&#xd;&#xa;jTable1.setOpaque(false);&#xd;&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;int columns=jTable1.getColumnCount();&#xa;for(int i=0; i&lt;columns; i++){&#xa;    DefaultTableCellRenderer render=new DefaultTableCellRenderer();&#xa;    render.setHorizontalAlignment(SwingConstants.CENTER);&#xa;    jTable1.getColumnModel().getColumn(i).setCellRenderer(render);&#xa;    render.setBackground(new Color(0,0,0,175));&#xa;    render.setForeground(new Color(0,153,255));&#xa;    jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);&#xa;    jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));&#xa;}&#xa;jTable1.getColumnModel().getColumn(0).setMaxWidth(85);&#xa;jTable1.setOpaque(false);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -390,7 +391,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="0" width="800" height="680"/>
+              <AbsoluteConstraints x="0" y="0" width="850" height="680"/>
             </Constraint>
           </Constraints>
         </Component>

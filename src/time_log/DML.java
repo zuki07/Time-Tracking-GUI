@@ -67,14 +67,14 @@ public class DML extends HandleTime{
         this.table_name=table;
     }
     
-    public void deleteProjectName(String table_name){
+    public void deleteProjectName(String project_name){
         try {
             first_connection=false;
             con=startConnection(first_connection);
             stmt=con.createStatement();
-            String query="DELETE FROM projectsData where project_name = '"+table_name+"'";
+            String query="DELETE FROM projectsData where project_name = '"+project_name+"'";
             stmt.executeUpdate(query);
-            query="DELETE FROM projectNames where project_names = '"+table_name+"'";
+            query="DELETE FROM projectNames where project_names = '"+project_name+"'";
             stmt.executeUpdate(query);
             stmt.close();
             closeConnection();
@@ -100,7 +100,7 @@ public class DML extends HandleTime{
     
     public Map readProjectRecords(){
         try {
-            String query2="SELECT date, start_time, end_time, duration, total_time " +
+            String query2="SELECT row_number, date, start_time, end_time, duration, total_time " +
                             "FROM projectsData WHERE project_name = '"+table_name+"'";
             first_connection=false;
             con=startConnection(first_connection);
@@ -110,6 +110,7 @@ public class DML extends HandleTime{
             records_row=new HashMap();
             while(rs.next()){
                 Map<String,String> records_map=new HashMap();
+                records_map.put("row_num", rs.getString("row_number"));
                 records_map.put("date", rs.getString("date"));
                 records_map.put("start_time", rs.getString("start_time"));
                 records_map.put("end_time", rs.getString("end_time"));

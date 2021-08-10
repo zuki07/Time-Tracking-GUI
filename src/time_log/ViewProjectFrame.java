@@ -196,11 +196,11 @@ public class ViewProjectFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "DATE", "START TIME", "END TIME", "DURATION", "TOTAL TIME"
+                "ROW #", "DATE", "START TIME", "END TIME", "DURATION", "TOTAL TIME"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -231,9 +231,10 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);
             jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));
         }
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(85);
         jTable1.setOpaque(false);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 157, 690, 450));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 157, 780, 450));
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         ((DefaultTableCellRenderer)jTable1.getDefaultRenderer(Object.class)).setOpaque(false);
@@ -254,11 +255,11 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         jPanel1.add(delete_row_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, 160, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/time_log/background.jpg"))); // NOI18N
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 680));
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 680));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 680));
 
-        setSize(new java.awt.Dimension(816, 721));
+        setSize(new java.awt.Dimension(814, 721));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -399,7 +400,9 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     public void pushProjectNames(){
         table_model.setNumRows(0);
         for(int i=0; i<records_map.size(); i++){
-            table_model.addRow(new Object[]{records_map.get(i).get("date"),
+            int row_int=Integer.parseInt(records_map.get(i).get("row_num"))+1;
+            table_model.addRow(new Object[]{String.valueOf(row_int),
+                                            records_map.get(i).get("date"),
                                             records_map.get(i).get("start_time"),
                                             records_map.get(i).get("end_time"),
                                             records_map.get(i).get("duration"),
