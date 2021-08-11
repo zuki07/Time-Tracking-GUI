@@ -173,7 +173,12 @@ public class ConfirmFrame extends javax.swing.JFrame {
                     else{
                         update_min=project_duration_array[1]-row_time_array[1];
                     }
-                    map.replace(key, update_hour+":"+update_min);
+                    if(update_min>=10){
+                        map.replace(key, update_hour+":"+update_min);
+                    }
+                    else{
+                        map.replace(key, update_hour+":0"+update_min);
+                    }
                 });
                 view_project_frame.time_log_stage.dml.updateRecordTotalTime(map, project_input_lowercase);
                 view_project_frame.time_log_stage.dml.deleteProjectData(project_row);
