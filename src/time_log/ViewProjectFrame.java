@@ -2,12 +2,20 @@ package time_log;
 
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JEditorPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -70,6 +78,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         project_label = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        print_btn = new javax.swing.JButton();
         delete_row_btn = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
@@ -234,10 +243,24 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setMaxWidth(85);
         jTable1.setOpaque(false);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 157, 780, 450));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 157, 760, 450));
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         ((DefaultTableCellRenderer)jTable1.getDefaultRenderer(Object.class)).setOpaque(false);
+
+        print_btn.setBackground(new java.awt.Color(0, 0, 0));
+        print_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
+        print_btn.setForeground(new java.awt.Color(242, 5, 48));
+        print_btn.setText("PRINT");
+        print_btn.setBorderPainted(false);
+        print_btn.setFocusable(false);
+        print_btn.setPreferredSize(new java.awt.Dimension(110, 40));
+        print_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_btnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(print_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 620, 160, -1));
 
         delete_row_btn.setBackground(new java.awt.Color(0, 0, 0));
         delete_row_btn.setFont(new java.awt.Font("Elephant", 1, 14)); // NOI18N
@@ -252,14 +275,14 @@ public class ViewProjectFrame extends javax.swing.JFrame {
                 delete_row_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(delete_row_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, 160, -1));
+        jPanel1.add(delete_row_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 620, 160, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/time_log/background.jpg"))); // NOI18N
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 680));
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 680));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 680));
 
-        setSize(new java.awt.Dimension(814, 721));
+        setSize(new java.awt.Dimension(814, 716));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -336,6 +359,48 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         Point point=evt.getPoint();
         this.row=jTable1.rowAtPoint(point);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void print_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_btnActionPerformed
+        try {
+            File print_file=new File("print_file.txt");
+            System.out.println(print_file.getAbsolutePath());
+            print_file.createNewFile();
+            FileWriter writer=new FileWriter(print_file);
+            writer.write("Cory Gibbs --- "+project_name+"\n\n");
+            for(int i=0; i<jTable1.getColumnCount();i++){
+                if(i!=0){
+                    writer.write(String.format("%13s", jTable1.getColumnName(i)));
+                }
+                else{
+                    writer.write(jTable1.getColumnName(i));
+                }
+            }
+            writer.write("\n");
+            for(row=0;row<jTable1.getRowCount();row++){
+                for(int col=0;col<jTable1.getColumnCount();col++){
+                    if(col!=0){
+                        writer.write(String.format("%13s",jTable1.getModel().getValueAt(row, col)));
+                    }
+                    else{
+                        writer.write(String.format("%5s",jTable1.getModel().getValueAt(row, col)));
+                    }
+                }
+                writer.write("\n");
+            }
+            writer.close();
+//            JEditorPane text=new JEditorPane(print_file.toURL());
+//            text.print();
+            Desktop desktop=Desktop.getDesktop();
+//            desktop.open(print_file);
+            desktop.print(print_file);
+//            print_file.delete();
+        } catch (IOException ex) {
+            Logger.getLogger(ViewProjectFrame.class.getName()).log(Level.SEVERE, null, ex);
+            showErrorStage(ex.toString());
+//        } catch (PrinterException ex) {
+//            Logger.getLogger(ViewProjectFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_print_btnActionPerformed
     
         
     /**
@@ -460,6 +525,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton print_btn;
     private javax.swing.JLabel project_label;
     private javax.swing.JButton start_btn;
     private javax.swing.JLabel start_time_label;
