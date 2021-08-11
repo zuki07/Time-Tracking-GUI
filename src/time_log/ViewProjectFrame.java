@@ -314,7 +314,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             timer.stop();
             try {
                 handle_time.totalTime(time_log_stage.dml);
-                table_model.addRow(new Object[]{handle_time.getDate(), handle_time.getTimeStart(),
+                table_model.addRow(new Object[]{table_model.getRowCount()+1,handle_time.getDate(), handle_time.getTimeStart(),
                                                 handle_time.getTimeEnd(), handle_time.getDuration(),
                                                 handle_time.getTotalTime()});
                 int added_row=table_model.getRowCount()-1;
@@ -366,7 +366,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             setTableStyles();
             
             MessageFormat header=new MessageFormat("Cory Gibbs:  "+project_name);
-            MessageFormat footer=new MessageFormat("{0}");
+            MessageFormat footer=new MessageFormat("Page Number: {0}");
             PrintRequestAttributeSet a_set=new HashPrintRequestAttributeSet();
             a_set.add(Chromaticity.MONOCHROME);
             jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer, true, a_set, true);
