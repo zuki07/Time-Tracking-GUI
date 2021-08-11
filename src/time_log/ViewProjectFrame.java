@@ -110,7 +110,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         total_label.setFont(new java.awt.Font("Elephant", 1, 18)); // NOI18N
         total_label.setForeground(new java.awt.Color(0, 153, 255));
         total_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        total_label.setText("0:0");
+        total_label.setText("0:00");
         total_label.setOpaque(true);
         total_label.setPreferredSize(new java.awt.Dimension(90, 40));
         jPanel1.add(total_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 90, -1));
@@ -118,7 +118,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         duration_label.setFont(new java.awt.Font("Elephant", 1, 18)); // NOI18N
         duration_label.setForeground(new java.awt.Color(0, 153, 255));
         duration_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        duration_label.setText("0:0");
+        duration_label.setText("0:00");
         duration_label.setPreferredSize(new java.awt.Dimension(90, 40));
         jPanel1.add(duration_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 100, -1));
 
@@ -364,7 +364,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             jTable1.setBackground(Color.white);
             jTable1.setForeground(Color.black);
             setTableStyles();
-            
+            print_btn.setBackground(Color.green);
             MessageFormat header=new MessageFormat("Cory Gibbs:  "+project_name);
             MessageFormat footer=new MessageFormat("Page Number: {0}");
             PrintRequestAttributeSet a_set=new HashPrintRequestAttributeSet();
@@ -373,6 +373,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             
             jTable1.setBackground(opaq_black);
             jTable1.setForeground(font_blue);
+            print_btn.setBackground(new Color(0,0,0));
             setTableStyles();
         } catch (PrinterException ex) {
             jTable1.setBackground(opaq_black);
