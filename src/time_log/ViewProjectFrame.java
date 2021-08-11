@@ -2,20 +2,24 @@ package time_log;
 
 
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.awt.print.PrinterJob;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JEditorPane;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Chromaticity;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -33,6 +37,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     DefaultTableModel table_model;
     Map <Integer, Map<String,String>> records_map; 
     Time_log time_log_stage;
+    final Color opaq_black=new Color(0,0,0,175), font_blue=new Color(0,153,255);
     
     /**
      * Creates new form NewJFrame
@@ -231,15 +236,9 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         ((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         int columns=jTable1.getColumnCount();
-        for(int i=0; i<columns; i++){
-            DefaultTableCellRenderer render=new DefaultTableCellRenderer();
-            render.setHorizontalAlignment(SwingConstants.CENTER);
-            jTable1.getColumnModel().getColumn(i).setCellRenderer(render);
-            render.setBackground(new Color(0,0,0,175));
-            render.setForeground(new Color(0,153,255));
-            jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);
-            jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));
-        }
+        jTable1.setBackground(opaq_black);
+        jTable1.setForeground(font_blue);
+        setTableStyles();
         jTable1.getColumnModel().getColumn(0).setMaxWidth(85);
         jTable1.setOpaque(false);
 
@@ -362,43 +361,24 @@ public class ViewProjectFrame extends javax.swing.JFrame {
 
     private void print_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_btnActionPerformed
         try {
-            File print_file=new File("print_file.txt");
-            System.out.println(print_file.getAbsolutePath());
-            print_file.createNewFile();
-            FileWriter writer=new FileWriter(print_file);
-            writer.write("Cory Gibbs --- "+project_name+"\n\n");
-            for(int i=0; i<jTable1.getColumnCount();i++){
-                if(i!=0){
-                    writer.write(String.format("%13s", jTable1.getColumnName(i)));
-                }
-                else{
-                    writer.write(jTable1.getColumnName(i));
-                }
-            }
-            writer.write("\n");
-            for(row=0;row<jTable1.getRowCount();row++){
-                for(int col=0;col<jTable1.getColumnCount();col++){
-                    if(col!=0){
-                        writer.write(String.format("%13s",jTable1.getModel().getValueAt(row, col)));
-                    }
-                    else{
-                        writer.write(String.format("%5s",jTable1.getModel().getValueAt(row, col)));
-                    }
-                }
-                writer.write("\n");
-            }
-            writer.close();
-//            JEditorPane text=new JEditorPane(print_file.toURL());
-//            text.print();
-            Desktop desktop=Desktop.getDesktop();
-//            desktop.open(print_file);
-            desktop.print(print_file);
-//            print_file.delete();
-        } catch (IOException ex) {
-            Logger.getLogger(ViewProjectFrame.class.getName()).log(Level.SEVERE, null, ex);
+            jTable1.setBackground(Color.white);
+            jTable1.setForeground(Color.black);
+            setTableStyles();
+            
+            MessageFormat header=new MessageFormat("Cory Gibbs:  "+project_name);
+            MessageFormat footer=new MessageFormat("{0}");
+            PrintRequestAttributeSet a_set=new HashPrintRequestAttributeSet();
+            a_set.add(Chromaticity.MONOCHROME);
+            jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer, true, a_set, true);
+            
+            jTable1.setBackground(opaq_black);
+            jTable1.setForeground(font_blue);
+            setTableStyles();
+        } catch (PrinterException ex) {
+            jTable1.setBackground(opaq_black);
+            jTable1.setForeground(font_blue);
+            setTableStyles();
             showErrorStage(ex.toString());
-//        } catch (PrinterException ex) {
-//            Logger.getLogger(ViewProjectFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_print_btnActionPerformed
     
@@ -512,6 +492,18 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         start_time_label.setVisible(false);
         end_time_label.setVisible(false);
         saved=true;
+    }
+    
+    public void setTableStyles(){
+        for(int i=0; i<jTable1.getColumnCount(); i++){
+                DefaultTableCellRenderer render=new DefaultTableCellRenderer();
+                render.setHorizontalAlignment(SwingConstants.CENTER);
+                jTable1.getColumnModel().getColumn(i).setCellRenderer(render);
+//                render.setBackground(background);
+//                render.setForeground(foreground);
+                jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);
+                jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));
+            }
     }
     
 

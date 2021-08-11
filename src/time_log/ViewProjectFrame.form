@@ -350,7 +350,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;int columns=jTable1.getColumnCount();&#xa;for(int i=0; i&lt;columns; i++){&#xa;    DefaultTableCellRenderer render=new DefaultTableCellRenderer();&#xa;    render.setHorizontalAlignment(SwingConstants.CENTER);&#xa;    jTable1.getColumnModel().getColumn(i).setCellRenderer(render);&#xa;    render.setBackground(new Color(0,0,0,175));&#xa;    render.setForeground(new Color(0,153,255));&#xa;    jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);&#xa;    jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));&#xa;}&#xa;jTable1.getColumnModel().getColumn(0).setMaxWidth(85);&#xa;jTable1.setOpaque(false);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;int columns=jTable1.getColumnCount();&#xa;jTable1.setBackground(opaq_black);&#xa;jTable1.setForeground(font_blue);&#xa;setTableStyles();&#xa;jTable1.getColumnModel().getColumn(0).setMaxWidth(85);&#xa;jTable1.setOpaque(false);"/>
               </AuxValues>
             </Component>
           </SubComponents>
