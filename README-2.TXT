@@ -19,5 +19,5 @@ CREATE TABLE projectsData (
 	end_time VARCHAR(10) NULL DEFAULT NULL , 
 	duration VARCHAR(10) NULL DEFAULT NULL , 
 	total_time VARCHAR(10) NULL DEFAULT NULL,
-	FOREIGN KEY (project_name) REFERENCES project_names (project_names) 
+	FOREIGN KEY (project_name) REFERENCES projectNames (project_names) 
 );
