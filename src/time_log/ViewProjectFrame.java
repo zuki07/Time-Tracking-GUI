@@ -236,9 +236,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         ((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         int columns=jTable1.getColumnCount();
-        jTable1.setBackground(opaq_black);
-        jTable1.setForeground(font_blue);
-        setTableStyles();
+        setTableStyles(opaq_black,font_blue);
         jTable1.getColumnModel().getColumn(0).setMaxWidth(85);
         jTable1.setOpaque(false);
 
@@ -361,24 +359,19 @@ public class ViewProjectFrame extends javax.swing.JFrame {
 
     private void print_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_btnActionPerformed
         try {
-            jTable1.setBackground(Color.white);
-            jTable1.setForeground(Color.black);
-            setTableStyles();
+            setTableStyles(Color.white, Color.black);
             print_btn.setBackground(Color.green);
+            
             MessageFormat header=new MessageFormat("Cory Gibbs:  "+project_name);
             MessageFormat footer=new MessageFormat("Page Number: {0}");
             PrintRequestAttributeSet a_set=new HashPrintRequestAttributeSet();
             a_set.add(Chromaticity.MONOCHROME);
             jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer, true, a_set, true);
             
-            jTable1.setBackground(opaq_black);
-            jTable1.setForeground(font_blue);
             print_btn.setBackground(new Color(0,0,0));
-            setTableStyles();
+            setTableStyles(opaq_black,font_blue);
         } catch (PrinterException ex) {
-            jTable1.setBackground(opaq_black);
-            jTable1.setForeground(font_blue);
-            setTableStyles();
+            setTableStyles(opaq_black,font_blue);
             showErrorStage(ex.toString());
         }
     }//GEN-LAST:event_print_btnActionPerformed
@@ -495,13 +488,13 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         saved=true;
     }
     
-    public void setTableStyles(){
+    public void setTableStyles(Color background, Color foreground){
+        jTable1.setBackground(background);
+        jTable1.setForeground(foreground);
         for(int i=0; i<jTable1.getColumnCount(); i++){
                 DefaultTableCellRenderer render=new DefaultTableCellRenderer();
                 render.setHorizontalAlignment(SwingConstants.CENTER);
                 jTable1.getColumnModel().getColumn(i).setCellRenderer(render);
-//                render.setBackground(background);
-//                render.setForeground(foreground);
                 jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);
                 jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));
             }

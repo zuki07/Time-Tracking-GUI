@@ -350,7 +350,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;int columns=jTable1.getColumnCount();&#xa;jTable1.setBackground(opaq_black);&#xa;jTable1.setForeground(font_blue);&#xa;setTableStyles();&#xa;jTable1.getColumnModel().getColumn(0).setMaxWidth(85);&#xa;jTable1.setOpaque(false);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);&#xa;int columns=jTable1.getColumnCount();&#xa;setTableStyles(opaq_black,font_blue);&#xa;jTable1.getColumnModel().getColumn(0).setMaxWidth(85);&#xa;jTable1.setOpaque(false);"/>
               </AuxValues>
             </Component>
           </SubComponents>
