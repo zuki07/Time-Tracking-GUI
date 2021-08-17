@@ -2,6 +2,8 @@
 package time_log;
 
 import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
     public ConfirmFrame(Time_log log_frame, String to_do, String header_str) {
         initComponents();
         this.log_frame=log_frame;
+        setFrameLocation(this.log_frame);
         this.to_do=to_do;
         this.header_str="<HTML>"+header_str+"<HTML>";
         header_label.setText(this.header_str);
@@ -36,6 +39,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
     public ConfirmFrame(ConfigureFrame config_frame, String to_do, String header_str){
         initComponents();
         this.config_frame=config_frame;
+        setFrameLocation(this.config_frame);
         this.to_do=to_do;
         this.header_str="<HTML>"+header_str+"<HTML>";
         header_label.setText(this.header_str);
@@ -45,6 +49,7 @@ public class ConfirmFrame extends javax.swing.JFrame {
     public ConfirmFrame(ViewProjectFrame view_project_frame,String to_do, String header_str){
         initComponents();
         this.view_project_frame=view_project_frame;
+        setFrameLocation(this.view_project_frame);
         this.to_do=to_do;
         this.header_str="<HTML>"+header_str+"<HTML>";
         this.project_input_lowercase=view_project_frame.time_log_stage.project_name;
@@ -222,6 +227,12 @@ public class ConfirmFrame extends javax.swing.JFrame {
         int duration_min=Integer.parseInt(token[1]);
         int[] duration_array={duration_hour, duration_min};
         return duration_array;
+    }
+    
+    private void setFrameLocation(Frame frame){
+        Point location_on_screen=frame.getLocationOnScreen();
+        location_on_screen.setLocation(location_on_screen.getX()-(this.getWidth()-frame.getWidth())/2, location_on_screen.getY()+(frame.getHeight()-this.getHeight())/2);
+        this.setLocation(location_on_screen);
     }
     
     /**

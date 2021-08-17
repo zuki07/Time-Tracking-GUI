@@ -1,6 +1,9 @@
 
 package time_log;
 
+import java.awt.Frame;
+import java.awt.Point;
+
 
 public class DisplayErrorFrame extends javax.swing.JFrame {
 
@@ -8,12 +11,18 @@ public class DisplayErrorFrame extends javax.swing.JFrame {
     /**
      * Creates new form Error_stage
      * @param error_str
+     * @param frame
      */
-    public DisplayErrorFrame(String error_str) {
+    public DisplayErrorFrame(String error_str, Frame frame) {
         initComponents();
         if(error_str.compareTo("Connection Good")==0){
             background.setBackground(new java.awt.Color(51,255,51));
             ok_btn.setBackground(new java.awt.Color(0,102,0));
+        }
+        else{
+            Point location_on_screen=frame.getLocationOnScreen();
+            location_on_screen.setLocation(location_on_screen.getX()-(this.getWidth()-frame.getWidth())/2, location_on_screen.getY()+(frame.getHeight()-this.getHeight())/2);
+            this.setLocation(location_on_screen);
         }
         this.error_str="<HTML>"+error_str+"</HTML>";
         error_txt.setText(this.error_str);
