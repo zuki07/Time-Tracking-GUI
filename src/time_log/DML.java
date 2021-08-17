@@ -4,6 +4,7 @@
 
 package time_log;
 
+import java.awt.Frame;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
@@ -20,7 +21,10 @@ public class DML extends HandleTime{
     String table_name, types_str;
     boolean first_connection;
     Map<Integer,Map<String,String>> records_row;
-    
+
+    public DML(Frame frame){
+        super.frame_change_location=frame;
+    }
     
     public void insertProjectNamesValues(String table_name){
         try {
@@ -327,7 +331,7 @@ public class DML extends HandleTime{
     }
     
     private void showErrorStage(String error_str){
-        DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str);
+        DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str, super.frame_change_location);
         error_stage.setVisible(true);
     }
 

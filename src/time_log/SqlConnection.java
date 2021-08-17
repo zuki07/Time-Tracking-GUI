@@ -4,6 +4,7 @@
 
 package time_log;
 
+import java.awt.Frame;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class SqlConnection {
             host=null,
             port=null;
     Connection con=null;
-    
+    Frame frame_change_location;
     
     public String getDatabase(){
         return database_name;
@@ -84,6 +85,7 @@ public class SqlConnection {
             }
             test_conn_list.clear();
             stmt.close();
+            project_names.close();
             closeConnection();
             showErrorStage("Connection Good");
         }
@@ -138,7 +140,7 @@ public class SqlConnection {
     }
      
     private void showErrorStage(String error_str){
-       DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str);
+       DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str, frame_change_location);
        error_stage.setTitle("Good Connection");
        error_stage.setVisible(true);
    }

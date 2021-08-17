@@ -3,6 +3,7 @@ package time_log;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.print.PrinterException;
@@ -41,6 +42,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
         this.timer=initTimer();
         this.time_log_stage=stage;
         initComponents();
+        setFrameLocation(this.time_log_stage, this);
         table_model=(DefaultTableModel) jTable1.getModel();
     }
     
@@ -273,11 +275,11 @@ public class ViewProjectFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 680));
 
-        setSize(new java.awt.Dimension(814, 716));
-        setLocationRelativeTo(null);
+        setBounds(0, 0, 814, 716);
     }// </editor-fold>//GEN-END:initComponents
 
     private void close_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_close_btnActionPerformed
+        setFrameLocation(this, this.time_log_stage);
         if(!saved){
             String error_str="Are you sure you want to close without stopping?";
             ErrorSaveFrame error_stage=new ErrorSaveFrame(error_str, this, time_log_stage);
@@ -293,7 +295,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
                 }
             }
             time_log_stage.table_model.setValueAt(time_log_stage.dml.getTotalTime(project_name), row, 1);
-            this.setVisible(false);
+            this.dispose();
             time_log_stage.setVisible(true);
         }
     }//GEN-LAST:event_close_btnActionPerformed
@@ -468,7 +470,7 @@ public class ViewProjectFrame extends javax.swing.JFrame {
     }
     
     private void showErrorStage(String error_str){
-        DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str);
+        DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str, this);
         error_stage.setVisible(true);
     }
     
@@ -492,6 +494,12 @@ public class ViewProjectFrame extends javax.swing.JFrame {
                 jTable1.getTableHeader().getColumnModel().getColumn(i).setHeaderRenderer(render);
                 jTable1.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 40));
             }
+    }
+    
+    private void setFrameLocation(Frame frame_value_from, Frame frame_to_set){
+        Point location_on_screen=frame_value_from.getLocationOnScreen();
+        location_on_screen.setLocation(location_on_screen.getX()-(frame_to_set.getWidth()-frame_value_from.getWidth())/2, location_on_screen.getY());
+        frame_to_set.setLocation(location_on_screen);
     }
     
 
