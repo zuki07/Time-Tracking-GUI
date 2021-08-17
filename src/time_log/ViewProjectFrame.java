@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Chromaticity;
+import javax.swing.JDialog;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -363,7 +364,6 @@ public class ViewProjectFrame extends javax.swing.JFrame {
             PrintRequestAttributeSet a_set=new HashPrintRequestAttributeSet();
             a_set.add(Chromaticity.MONOCHROME);
             jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer, true, a_set, true);
-            
             print_btn.setBackground(new Color(0,0,0));
             setTableStyles(opaq_black,font_blue);
         } catch (PrinterException ex) {
