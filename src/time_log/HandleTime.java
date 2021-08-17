@@ -14,7 +14,7 @@ public class HandleTime extends SqlConnection{
     static String start_date, end_date, start_str, end_str, duration_str, total_str;
     private LocalTime time_start, time_end, time_duration;
     private int duration_hr, duration_min; 
-    
+
     public void startDate(){
         LocalDate date_now=LocalDate.now();
         DateTimeFormatter formater=DateTimeFormatter.ofPattern("yyyy-MM-dd");

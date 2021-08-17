@@ -1,6 +1,9 @@
 
 package time_log;
 
+import java.awt.Frame;
+import java.awt.Point;
+
 
 public class ErrorSaveFrame extends javax.swing.JFrame {
 
@@ -18,6 +21,7 @@ public class ErrorSaveFrame extends javax.swing.JFrame {
         this.project_stage=project_stage;
         this.time_stage=time_stage;
         initComponents();
+        setFrameLocation(project_stage, this);
         this.error_str=error_str;
         error_label.setText(error_str);
     }
@@ -26,6 +30,7 @@ public class ErrorSaveFrame extends javax.swing.JFrame {
         initComponents();
         this.config_frame=config_frame;
         this.time_stage=time_stage;
+        setFrameLocation(config_frame, this);
         this.error_str=error_str;
         error_label.setText(error_str);
     }
@@ -136,6 +141,12 @@ public class ErrorSaveFrame extends javax.swing.JFrame {
             public void run() {
             }
         });
+    }
+    
+    private void setFrameLocation(Frame frame_value_from, Frame frame_to_set){
+        Point location_on_screen=frame_value_from.getLocationOnScreen();
+        location_on_screen.setLocation(location_on_screen.getX()-(frame_to_set.getWidth()-frame_value_from.getWidth())/2, location_on_screen.getY()+(frame_value_from.getHeight()-frame_to_set.getHeight())/2);
+        frame_to_set.setLocation(location_on_screen);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

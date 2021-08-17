@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Time_log extends javax.swing.JFrame {
 
-    DML dml=new DML();
+    DML dml=new DML(this);
     List list, types_list;
     boolean value_match=false, drop_btn_selected=false, display_type_changes=true;
     DefaultTableModel table_model;
@@ -35,7 +35,6 @@ public class Time_log extends javax.swing.JFrame {
     public Time_log(){
         initComponents();
         table_model=(DefaultTableModel) jTable1.getModel();
-        project_frame=new ViewProjectFrame(this);
         try {
             dml.startConnection(true);
             dml.closeConnection();
@@ -413,6 +412,7 @@ public class Time_log extends javax.swing.JFrame {
         int column=jTable1.columnAtPoint(point);
         if(column==2){
             project_name=jTable1.getValueAt(row, 0).toString().toLowerCase();
+            project_frame=new ViewProjectFrame(this);
             project_frame.setProjectName(project_name);
             this.setVisible(false);
             project_frame.setVisible(true);
@@ -537,6 +537,7 @@ public class Time_log extends javax.swing.JFrame {
     
     public void hideTypeTools(){
         type_input.setVisible(false);
+        type_input.setText("--TYPE OF PROJECT--");
         type_add.setVisible(false);
         type_drop.setVisible(false);
         display_type_changes=true;
@@ -550,7 +551,7 @@ public class Time_log extends javax.swing.JFrame {
     }
     
     private void showErrorStage(String error_str){
-        DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str);
+        DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str, this);
         error_stage.setVisible(true);
     }
  

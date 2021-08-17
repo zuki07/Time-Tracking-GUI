@@ -4,6 +4,8 @@
 package time_log;
 
 import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Point;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -32,6 +34,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
     public ConfigureFrame(Time_log log_frame) {
         initComponents();
         this.log_frame=log_frame;
+        setFrameLocation(this.log_frame, this);
         readData();
         test_map.putAll(data_map);
         database_input.setText(data_map.get("database"));
@@ -184,6 +187,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
             error_frame.setVisible(true);
         }
         else{
+            setFrameLocation(this, log_frame);
             this.dispose();
             log_frame.setVisible(true);
         }
@@ -198,8 +202,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
                 error_with_connection=false;
             } catch (SQLException ex) {
                 error_with_connection=true;
-                DisplayErrorFrame error_stage=new DisplayErrorFrame(ex.toString());
-                error_stage.setVisible(true);
+                showErrorStage(ex.toString());
             }
         }
         is_tested=true;
@@ -224,12 +227,10 @@ public class ConfigureFrame extends javax.swing.JFrame {
             changes_made=false;
         }
         else if(!is_tested){
-            DisplayErrorFrame error_stage=new DisplayErrorFrame("Please test the connection before saving");
-            error_stage.setVisible(true);
+            showErrorStage("Please test the connection before saving");
         }
         else if(error_with_connection){
-            DisplayErrorFrame error_stage=new DisplayErrorFrame("Please get a successful test connection before saving");
-            error_stage.setVisible(true);
+            showErrorStage("Please get a successful test connection before saving");
         }
         test_btn.setBackground(new Color(0,0,0));
         is_saved=true;
@@ -311,7 +312,7 @@ public class ConfigureFrame extends javax.swing.JFrame {
     }
     
     private void showErrorStage(String error_str){
-        DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str);
+        DisplayErrorFrame error_stage=new DisplayErrorFrame(error_str, this);
         error_stage.setVisible(true);
     }
     
@@ -337,6 +338,12 @@ public class ConfigureFrame extends javax.swing.JFrame {
             test_map.replace("port", port_input.getText());
             changes_made=true;
         }
+    }
+    
+    private void setFrameLocation(Frame frame_value_from, Frame frame_to_set){
+        Point location_on_screen=frame_value_from.getLocationOnScreen();
+        location_on_screen.setLocation(location_on_screen.getX()-(frame_to_set.getWidth()-frame_value_from.getWidth())/2, location_on_screen.getY());
+        frame_to_set.setLocation(location_on_screen);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
