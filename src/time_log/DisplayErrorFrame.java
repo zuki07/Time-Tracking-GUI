@@ -27,6 +27,12 @@ public class DisplayErrorFrame extends javax.swing.JFrame {
         this.error_str="<HTML>"+error_str+"</HTML>";
         error_txt.setText(this.error_str);
     }
+    
+    public DisplayErrorFrame(String error_str){
+        initComponents();
+        this.error_str="<HTML>"+error_str+"</HTML>";
+        error_txt.setText(this.error_str);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
