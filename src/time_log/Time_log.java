@@ -42,7 +42,8 @@ public class Time_log extends javax.swing.JFrame {
             setDatabaseSize();
             this.setTitle("Database: "+dml.getDatabase());
         } catch (SQLException ex) {
-            showErrorStage(ex.toString());
+            DisplayErrorFrame error_stage=new DisplayErrorFrame(ex.toString());
+            error_stage.setVisible(true);
         }
     }
     
