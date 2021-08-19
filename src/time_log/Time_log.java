@@ -15,10 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author wildzuk
- */
+
 public class Time_log extends javax.swing.JFrame {
 
     DML dml=new DML(this);
