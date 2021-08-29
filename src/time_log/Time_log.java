@@ -463,6 +463,10 @@ public class Time_log extends javax.swing.JFrame {
             empty=true;
             return empty;
         }
+        if(input.getText().compareTo("")==0){
+            empty=true;
+            return empty;
+        }
         return empty;
     }
     
